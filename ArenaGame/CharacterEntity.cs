@@ -227,6 +227,44 @@ namespace WalkingGame
                 const float desiredSpeed = 200;
                 desiredVelocity *= desiredSpeed;
             }
+            if (keyBoardState.IsKeyDown(Keys.D) && keyBoardState.IsKeyDown(Keys.W))
+            {
+                desiredVelocity.X = 3;
+                desiredVelocity.Y = -3;
+
+                desiredVelocity.Normalize();
+                const float desiredSpeed = 200;
+                desiredVelocity *= desiredSpeed;
+            }
+
+            if (keyBoardState.IsKeyDown(Keys.A) && keyBoardState.IsKeyDown(Keys.S))
+            {
+                desiredVelocity.X = -3;
+                desiredVelocity.Y = 3;
+
+                desiredVelocity.Normalize();
+                const float desiredSpeed = 200;
+                desiredVelocity *= desiredSpeed;
+            }
+
+            if (keyBoardState.IsKeyDown(Keys.D) && keyBoardState.IsKeyDown(Keys.S))
+            {
+                desiredVelocity.X = 3;
+                desiredVelocity.Y = 3;
+
+                desiredVelocity.Normalize();
+                const float desiredSpeed = 200;
+                desiredVelocity *= desiredSpeed;
+            }
+            if (keyBoardState.IsKeyDown(Keys.A) && keyBoardState.IsKeyDown(Keys.W))
+            {
+                desiredVelocity.X = -3;
+                desiredVelocity.Y = -3;
+
+                desiredVelocity.Normalize();
+                const float desiredSpeed = 200;
+                desiredVelocity *= desiredSpeed;
+            }
 
             return desiredVelocity;
         }
