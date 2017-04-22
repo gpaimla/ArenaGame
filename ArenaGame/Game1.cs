@@ -76,24 +76,27 @@ namespace WalkingGame
             //    this.graphics.ApplyChanges();
             //}
 
-                if (Keyboard.GetState().IsKeyDown(Keys.F11))
-                {
-                    if (graphics.IsFullScreen)
-                    {
-                        graphics.PreferredBackBufferWidth = 1280;
-                        graphics.PreferredBackBufferHeight = 720;
-                    }
-                    else
-                    {
-                        graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width; // set this value to the desired width of your window
-                        graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
-                    }
-                    graphics.ToggleFullScreen();
-                }
-                graphics.ApplyChanges();
+            checkKeyInput();
+            graphics.ApplyChanges();
             
         }
-
+        void checkKeyInput()
+        {
+            if (Keyboard.GetState().IsKeyDown(Keys.F11))
+            {
+                if (graphics.IsFullScreen)
+                {
+                    graphics.PreferredBackBufferWidth = 1280;
+                    graphics.PreferredBackBufferHeight = 720;
+                }
+                else
+                {
+                    graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width; // set this value to the desired width of your window
+                    graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+                }
+                graphics.ToggleFullScreen();
+            }
+        }
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
