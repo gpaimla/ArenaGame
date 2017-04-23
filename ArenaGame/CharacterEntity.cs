@@ -267,5 +267,52 @@ namespace ArenaGame
             previousState = keyBoardState;
             return velocity;
         }
+        public void Collision(Rectangle newRectangle, int xOffset, int yOffset)
+        {
+            int fullX = (int)this.X;
+            int fullY = (int)this.Y;
+            Rectangle rect = new Rectangle(fullX,fullY, 16, 16);
+
+
+            if (rect.TouchTopOf(newRectangle))
+            {
+                rect.Y = newRectangle.Y - rect.Height;
+            }
+            if (rect.TouchLeftOf(newRectangle))
+            {
+                fullX = newRectangle.X - rect.Width - 2;
+            }
+            if (rect.TouchRightOf(newRectangle))
+            {
+                fullX = newRectangle.X + rect.Width + 2;
+            }
+
+            if (rect.TouchBottomOf(newRectangle))
+            {
+                rect.Y = newRectangle.Y + rect.Height;
+            }
+
+            if(this.X < 0)
+            {
+                this.X = 0;
+            }
+
+            if(this.X + 16 > 1920)
+            {
+                this.X = 1920 - 16;
+            }
+
+            if (this.Y + 16> 1080)
+            {
+                this.Y = 1080 - 16;
+            }
+
+            if (this.Y < 0)
+            {
+                this.Y = 0;
+            }
+
+
+        }
     }
 }

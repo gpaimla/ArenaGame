@@ -99,6 +99,11 @@ namespace ArenaGame
         protected override void Update(GameTime gameTime)
         {
             character.Update(gameTime);
+
+            foreach(CollisionTiles tile in fenceMap.CollisionTiles)
+            {
+                character.Collision(tile.Rectangle, fenceMap.Width, fenceMap.Height);
+            }
             base.Update(gameTime);
 
             checkKeyInput();
