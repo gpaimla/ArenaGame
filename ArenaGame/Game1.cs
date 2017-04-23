@@ -59,10 +59,15 @@ namespace ArenaGame
 
             map.Generate(new int[,]
             {
-                {2, 1, 1, 2, },
-                {2, 1, 1, 2, },
-                {2, 1, 1, 2, },
-                {2, 1, 1, 2, },
+                {2, 2, 2, 2, 1, 1, 1, 1, 2, 2, 2, 2, },
+                {2, 2, 2, 2, 1, 1, 1, 1, 2, 2, 2, 2, },
+                {2, 2, 2, 2, 1, 1, 1, 1, 2, 2, 2, 2, },
+                {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, },
+                {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, },
+                {2, 2, 2, 2, 1, 1, 1, 1, 2, 2, 2, 2, },
+                {2, 2, 2, 2, 1, 1, 1, 1, 2, 2, 2, 2, },
+                {2, 2, 2, 2, 1, 1, 1, 1, 2, 2, 2, 2, },
+
             }, 64);
 
         }
@@ -110,9 +115,10 @@ namespace ArenaGame
             spriteBatch.Begin();
 
             // Now we can do any entity rendering:
+            map.Draw(spriteBatch);
             character.Draw(spriteBatch);
             // End renders all sprites to the screen:
-            map.Draw(spriteBatch);
+            
             spriteBatch.End();
 
             base.Draw(gameTime);
