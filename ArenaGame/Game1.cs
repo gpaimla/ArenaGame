@@ -22,16 +22,12 @@ namespace ArenaGame
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width; // set this value to the desired width of your window
-            graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;  // set this value to the desired height of your window
+            Content.RootDirectory = "Content";
+            graphics.PreferredBackBufferWidth = 1920;
+            graphics.PreferredBackBufferHeight = 1080;
             graphics.IsFullScreen = true;
-            
             graphics.ApplyChanges();
 
-            Content.RootDirectory = "Content";
-            graphics.IsFullScreen = true;
-
-            
         }
 
         /// <summary>
@@ -43,7 +39,7 @@ namespace ArenaGame
         protected override void Initialize()
         {
             character = new CharacterEntity(this.GraphicsDevice);
-
+            
             base.Initialize();
 
         }
@@ -82,18 +78,11 @@ namespace ArenaGame
         }
         void checkKeyInput()
         {
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+                this.Exit();
+
             if (Keyboard.GetState().IsKeyDown(Keys.F11))
             {
-                if (graphics.IsFullScreen)
-                {
-                    graphics.PreferredBackBufferWidth = 1280;
-                    graphics.PreferredBackBufferHeight = 720;
-                }
-                else
-                {
-                    graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width; // set this value to the desired width of your window
-                    graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
-                }
                 graphics.ToggleFullScreen();
             }
         }
