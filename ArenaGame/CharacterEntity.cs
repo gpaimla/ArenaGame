@@ -277,6 +277,7 @@ namespace ArenaGame
             if (rect.TouchTopOf(newRectangle))
             {
                 this.Y = newRectangle.Y - rect.Height;
+                
             }
             if (rect.TouchLeftOf(newRectangle))
             {
@@ -289,7 +290,7 @@ namespace ArenaGame
 
             if (rect.TouchBottomOf(newRectangle))
             {
-                this.Y = newRectangle.Y + rect.Height;
+                this.Y = newRectangle.Y + rect.Height + 2;
             }
 
             if(this.X < 0)
