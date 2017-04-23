@@ -97,6 +97,12 @@ namespace ArenaGame
 
         public void Update(GameTime gameTime)
         {
+
+            checkKeyInputs(gameTime);
+            currentAnimation.Update(gameTime);
+        }
+        void checkKeyInputs(GameTime gameTime)
+        {
             var velocity = GetDesiredVelocityFromInput();
 
             this.X += velocity.X * (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -177,8 +183,6 @@ namespace ArenaGame
                     currentAnimation = standDown;
                 }
             }
-
-            currentAnimation.Update(gameTime);
         }
 
         Vector2 GetDesiredVelocityFromInput()
