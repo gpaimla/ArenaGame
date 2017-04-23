@@ -22,6 +22,8 @@ namespace ArenaGame
 
         Animation currentAnimation;
 
+        
+
         public float X
         {
             get;
@@ -33,6 +35,8 @@ namespace ArenaGame
             get;
             set;
         }
+
+
 
         public CharacterEntity(GraphicsDevice graphicsDevice)
         {
@@ -261,5 +265,15 @@ namespace ArenaGame
 
             return desiredVelocity;
         }
+
+        //public void Collision(Rectangle newRectangle, int xOffset, int yOffset)
+        //{
+        //    Rectangle cR = new Rectangle(this.X, this.Y, 16, 16);
+        //    if(X, Y.TouchTopOf(newRectangle))
+        //    {ui
+
+        //    }
+        //}
+
     }
 }
