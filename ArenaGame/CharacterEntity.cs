@@ -274,25 +274,25 @@ namespace ArenaGame
         public void Collision(Rectangle newRectangle, int xOffset, int yOffset)
         {
 
-            Rectangle rect = new Rectangle((int)X,(int)Y, 16, 16);
+            Rectangle rect = new Rectangle((int)X, (int)Y, currentAnimation.CurrentRectangle.Width,currentAnimation.CurrentRectangle.Height);
 
 
             if (rect.TouchTopOf(newRectangle))
             {
-                this.Y = newRectangle.Y - rect.Height -2 ;
+                this.Y = newRectangle.Y - rect.Height ;
             }
             if (rect.TouchLeftOf(newRectangle))
             {
-                this.X = newRectangle.X - rect.Width - 2;
+                this.X = newRectangle.X -16;
             }
             if (rect.TouchRightOf(newRectangle))
             {
-                this.X = newRectangle.X + rect.Width + 2;
+                this.X = newRectangle.X + newRectangle.Width + 2;
             }
 
             if (rect.TouchBottomOf(newRectangle))
             {
-                this.Y = newRectangle.Y + rect.Height +2;
+                this.Y = newRectangle.Y + newRectangle.Height +6;
             }
 
             if(this.X < 0)
