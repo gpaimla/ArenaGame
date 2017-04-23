@@ -22,6 +22,7 @@ namespace ArenaGame
 
         Animation currentAnimation;
         KeyboardState previousState;
+
         public float X
         {
             get;
@@ -33,6 +34,8 @@ namespace ArenaGame
             get;
             set;
         }
+
+        
 
         public CharacterEntity(GraphicsDevice graphicsDevice)
         {
@@ -169,7 +172,7 @@ namespace ArenaGame
                 }
                 // If the character is standing still but is not showing
                 // any animation at all then we'll default to facing down.
-                else if (currentAnimation == null )
+                else if (currentAnimation == null)
                 {
                     currentAnimation = standDown;
                 }
@@ -183,8 +186,8 @@ namespace ArenaGame
             Vector2 velocity = new Vector2();
 
             KeyboardState keyBoardState = Keyboard.GetState();
-            
-            
+
+
             if (keyBoardState.IsKeyDown(Keys.W) && !previousState.IsKeyDown(Keys.S))
             {
                 velocity.Y = -3;

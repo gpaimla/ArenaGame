@@ -18,6 +18,8 @@ namespace ArenaGame
         }
 
         private int width, height;
+        private string tName;
+
         public int Width
         {
             get { return width; }
@@ -27,7 +29,11 @@ namespace ArenaGame
             get { return height; }
         }
 
-        public Map() { }
+        public Map(string tileName) {
+            tName = tileName;
+        }
+
+
 
         public void Generate(int[,] map, int size)
         {
@@ -39,7 +45,7 @@ namespace ArenaGame
 
                     if(number > 0)
                     {
-                        collisionTiles.Add(new CollisionTiles(number, new Rectangle(x * size, y * size, size, size)));
+                        collisionTiles.Add(new CollisionTiles(number, new Rectangle(x * size, y * size, size, size), tName));
 
                         width = (x + 1) * size;
                         height = (y + 1) * size;

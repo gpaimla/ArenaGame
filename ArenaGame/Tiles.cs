@@ -11,6 +11,8 @@ namespace ArenaGame
 {
     class Tiles
     {
+
+
         protected Texture2D texture;
 
         private Rectangle rectangle;
@@ -36,9 +38,9 @@ namespace ArenaGame
 
         class CollisionTiles : Tiles
         {
-            public CollisionTiles(int i, Rectangle newRectangle)
+            public CollisionTiles(int i, Rectangle newRectangle, string tName)
             {
-                texture = Content.Load<Texture2D>("Tile" + i);
+                texture = Content.Load<Texture2D>(tName + i);
                 this.Rectangle = newRectangle;
             }
         }

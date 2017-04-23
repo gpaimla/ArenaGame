@@ -17,6 +17,7 @@ namespace ArenaGame
         SpriteBatch spriteBatch;
 
         Map map;
+        Map fenceMap;
 
         CharacterEntity character;
         KeyboardState keyBoardState = Keyboard.GetState();
@@ -43,7 +44,8 @@ namespace ArenaGame
             character = new CharacterEntity(this.GraphicsDevice);
             character.X = graphics.PreferredBackBufferWidth / 2;
             character.Y = graphics.PreferredBackBufferHeight / 2;
-            map = new Map();
+            map = new Map("Tile");
+            fenceMap = new Map("Fence");
 
             base.Initialize();
 
@@ -79,6 +81,12 @@ namespace ArenaGame
                 {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, },
                 {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, },
 
+            }, 64);
+
+
+            fenceMap.Generate(new int[,]
+{
+                {0, 0, 0, 0, 1, 1, 1, 1, 1, 1, },
             }, 64);
 
         }
@@ -120,6 +128,7 @@ namespace ArenaGame
 
             // Now we can do any entity rendering:
             map.Draw(spriteBatch);
+            fenceMap.Draw(spriteBatch);
             character.Draw(spriteBatch);
             // End renders all sprites to the screen:
             
