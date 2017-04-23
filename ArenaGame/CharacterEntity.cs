@@ -276,20 +276,20 @@ namespace ArenaGame
 
             if (rect.TouchTopOf(newRectangle))
             {
-                rect.Y = newRectangle.Y - rect.Height;
+                this.Y = newRectangle.Y - rect.Height;
             }
             if (rect.TouchLeftOf(newRectangle))
             {
-                fullX = newRectangle.X - rect.Width - 2;
+                this.X = newRectangle.X - rect.Width - 2;
             }
             if (rect.TouchRightOf(newRectangle))
             {
-                fullX = newRectangle.X + rect.Width + 2;
+                this.X = newRectangle.X + rect.Width + 2;
             }
 
             if (rect.TouchBottomOf(newRectangle))
             {
-                rect.Y = newRectangle.Y + rect.Height;
+                this.Y = newRectangle.Y + rect.Height;
             }
 
             if(this.X < 0)
@@ -311,8 +311,6 @@ namespace ArenaGame
             {
                 this.Y = 0;
             }
-
-
         }
     }
 }
