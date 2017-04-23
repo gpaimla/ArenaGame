@@ -16,6 +16,8 @@ namespace ArenaGame
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        Map map;
+
         CharacterEntity character;
         KeyboardState keyBoardState = Keyboard.GetState();
 
@@ -39,7 +41,8 @@ namespace ArenaGame
         protected override void Initialize()
         {
             character = new CharacterEntity(this.GraphicsDevice);
-            
+            map = new Map();
+
             base.Initialize();
 
         }
@@ -52,6 +55,15 @@ namespace ArenaGame
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            Tiles.Content = Content;
+
+            map.Generate(new int[,]
+            {
+                {2, 1, 1, 2, },
+                {2, 1, 1, 2, },
+                {2, 1, 1, 2, },
+                {2, 1, 1, 2, },
+            }, 64);
 
         }
 
@@ -100,6 +112,7 @@ namespace ArenaGame
             // Now we can do any entity rendering:
             character.Draw(spriteBatch);
             // End renders all sprites to the screen:
+            map.Draw(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);
