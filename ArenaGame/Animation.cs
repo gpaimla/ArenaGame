@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
-namespace WalkingGame
+namespace ArenaGame
 {
     public class Animation
     {

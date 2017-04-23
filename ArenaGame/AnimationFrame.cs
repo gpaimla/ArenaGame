@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 
-namespace WalkingGame
+namespace ArenaGame
 {
     public class AnimationFrame
     {

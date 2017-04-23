@@ -1,5 +1,5 @@
 ﻿using System;
-using WalkingGame;
+
 
 namespace ArenaGame
 {

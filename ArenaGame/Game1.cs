@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Input;
 
 #endregion
 
-namespace WalkingGame
+namespace ArenaGame
 {
     /// <summary>
     /// This is the main type for your game.
