@@ -9,7 +9,7 @@ namespace ArenaGame
     public class CharacterEntity
     {
         static Texture2D characterSheetTexture;
-
+        private const float desiredSpeed = 200;
         Animation walkDown;
         Animation walkUp;
         Animation walkLeft;
@@ -21,7 +21,7 @@ namespace ArenaGame
         Animation standRight;
 
         Animation currentAnimation;
-
+        KeyboardState previousState;
         public float X
         {
             get;
@@ -36,6 +36,7 @@ namespace ArenaGame
 
         public CharacterEntity(GraphicsDevice graphicsDevice)
         {
+            previousState = Keyboard.GetState();
             if (characterSheetTexture == null)
             {
                 using (var stream = TitleContainer.OpenStream("Content/charactersheet.png"))
@@ -90,6 +91,29 @@ namespace ArenaGame
 
             spriteBatch.Draw(characterSheetTexture, topLeftOfSprite, sourceRectangle, Color.White);
         }
+        /*public void Update(GameTime gameTime)
+        {
+            KeyboardState keyBoardState = Keyboard.GetState();
+            if (keyBoardState.IsKeyDown(Keys.W)){
+                currentAnimation = walkUp;
+                this.Y -= 10 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            }
+            if (keyBoardState.IsKeyDown(Keys.S))
+            {
+                currentAnimation = walkDown;
+                this.Y += 10 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            }
+            if (keyBoardState.IsKeyDown(Keys.A))
+            {
+                currentAnimation = walkLeft;
+                this.X -= 10 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            }
+            if (keyBoardState.IsKeyDown(Keys.D))
+            {
+                currentAnimation = walkRight;
+                this.X += 10 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            }
+        }*/
 
         public void Update(GameTime gameTime)
         {
@@ -179,87 +203,72 @@ namespace ArenaGame
 
         Vector2 GetDesiredVelocityFromInput()
         {
-            Vector2 desiredVelocity = new Vector2();
+            Vector2 velocity = new Vector2();
 
             KeyboardState keyBoardState = Keyboard.GetState();
-
-            if (keyBoardState.IsKeyDown(Keys.W))
+            
+            
+            if (keyBoardState.IsKeyDown(Keys.W) && !previousState.IsKeyDown(Keys.S))
             {
-
-
-                desiredVelocity.Y = -3;
-
-                //if (desiredVelocity.X != 0 || desiredVelocity.Y != 0)
-                //{
-                desiredVelocity.Normalize();
-                const float desiredSpeed = 200;
-                desiredVelocity *= desiredSpeed;
-                //}
+                velocity.Y = -3;
+                velocity.Normalize();
             }
-            if(keyBoardState.IsKeyDown(Keys.S))
+            if (keyBoardState.IsKeyDown(Keys.S) && !previousState.IsKeyDown(Keys.W))
             {
-                desiredVelocity.Y = 3;
-
-                desiredVelocity.Normalize();
-                const float desiredSpeed = 200;
-                desiredVelocity *= desiredSpeed;
+                velocity.Y = 3;
+                velocity.Normalize();
             }
-            if (keyBoardState.IsKeyDown(Keys.A))
+            if (keyBoardState.IsKeyDown(Keys.A) && !previousState.IsKeyDown(Keys.D))
             {
-                desiredVelocity.X = -3;
-
-                desiredVelocity.Normalize();
-                const float desiredSpeed = 200;
-                desiredVelocity *= desiredSpeed;
+                velocity.X = -3;
+                velocity.Normalize();
             }
-            if (keyBoardState.IsKeyDown(Keys.D))
+            if (keyBoardState.IsKeyDown(Keys.D) && !previousState.IsKeyDown(Keys.A))
             {
-                desiredVelocity.X = 3;
-
-                desiredVelocity.Normalize();
-                const float desiredSpeed = 200;
-                desiredVelocity *= desiredSpeed;
+                velocity.X = 3;
+                velocity.Normalize();
             }
             if (keyBoardState.IsKeyDown(Keys.D) && keyBoardState.IsKeyDown(Keys.W))
             {
-                desiredVelocity.X = 3;
-                desiredVelocity.Y = -3;
-
-                desiredVelocity.Normalize();
-                const float desiredSpeed = 200;
-                desiredVelocity *= desiredSpeed;
+                velocity.X = 3;
+                velocity.Y = -3;
+                velocity.Normalize();
             }
 
             if (keyBoardState.IsKeyDown(Keys.A) && keyBoardState.IsKeyDown(Keys.S))
             {
-                desiredVelocity.X = -3;
-                desiredVelocity.Y = 3;
-
-                desiredVelocity.Normalize();
-                const float desiredSpeed = 200;
-                desiredVelocity *= desiredSpeed;
+                velocity.X = -3;
+                velocity.Y = 3;
+                velocity.Normalize();
             }
 
             if (keyBoardState.IsKeyDown(Keys.D) && keyBoardState.IsKeyDown(Keys.S))
             {
-                desiredVelocity.X = 3;
-                desiredVelocity.Y = 3;
-
-                desiredVelocity.Normalize();
-                const float desiredSpeed = 200;
-                desiredVelocity *= desiredSpeed;
+                velocity.X = 3;
+                velocity.Y = 3;
+                velocity.Normalize();
             }
             if (keyBoardState.IsKeyDown(Keys.A) && keyBoardState.IsKeyDown(Keys.W))
             {
-                desiredVelocity.X = -3;
-                desiredVelocity.Y = -3;
-
-                desiredVelocity.Normalize();
-                const float desiredSpeed = 200;
-                desiredVelocity *= desiredSpeed;
+                velocity.X = -3;
+                velocity.Y = -3;
+                velocity.Normalize();
             }
-
-            return desiredVelocity;
+            if (keyBoardState.IsKeyDown(Keys.A) && keyBoardState.IsKeyDown(Keys.W) && keyBoardState.IsKeyDown(Keys.D))
+            {
+                velocity.Y = -3;
+                velocity.X = 0;
+                velocity.Normalize();
+            }
+            if (keyBoardState.IsKeyDown(Keys.A) && keyBoardState.IsKeyDown(Keys.S) && keyBoardState.IsKeyDown(Keys.D))
+            {
+                velocity.Y = 3;
+                velocity.X = 0;
+                velocity.Normalize();
+            }
+            velocity *= desiredSpeed;
+            previousState = keyBoardState;
+            return velocity;
         }
     }
 }
