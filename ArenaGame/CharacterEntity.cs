@@ -91,29 +91,6 @@ namespace ArenaGame
 
             spriteBatch.Draw(characterSheetTexture, topLeftOfSprite, sourceRectangle, Color.White);
         }
-        /*public void Update(GameTime gameTime)
-        {
-            KeyboardState keyBoardState = Keyboard.GetState();
-            if (keyBoardState.IsKeyDown(Keys.W)){
-                currentAnimation = walkUp;
-                this.Y -= 10 * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            }
-            if (keyBoardState.IsKeyDown(Keys.S))
-            {
-                currentAnimation = walkDown;
-                this.Y += 10 * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            }
-            if (keyBoardState.IsKeyDown(Keys.A))
-            {
-                currentAnimation = walkLeft;
-                this.X -= 10 * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            }
-            if (keyBoardState.IsKeyDown(Keys.D))
-            {
-                currentAnimation = walkRight;
-                this.X += 10 * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            }
-        }*/
 
         public void Update(GameTime gameTime)
         {
@@ -260,16 +237,22 @@ namespace ArenaGame
                 velocity.X = 0;
                 velocity.Normalize();
             }
-            if (keyBoardState.IsKeyDown(Keys.S) && keyBoardState.IsKeyDown(Keys.W) && keyBoardState.IsKeyDown(Keys.D))
+            if (keyBoardState.IsKeyDown(Keys.S) && keyBoardState.IsKeyDown(Keys.A) && keyBoardState.IsKeyDown(Keys.D))
             {
-                velocity.Y = 0;
-                velocity.X = 3;
+                velocity.Y = 3;
+                velocity.X = 0;
                 velocity.Normalize();
             }
             if (keyBoardState.IsKeyDown(Keys.S) && keyBoardState.IsKeyDown(Keys.W) && keyBoardState.IsKeyDown(Keys.A))
             {
                 velocity.Y = 0;
                 velocity.X = -3;
+                velocity.Normalize();
+            }
+            if (keyBoardState.IsKeyDown(Keys.S) && keyBoardState.IsKeyDown(Keys.W) && keyBoardState.IsKeyDown(Keys.D))
+            {
+                velocity.Y = 0;
+                velocity.X = 3;
                 velocity.Normalize();
             }
             if (keyBoardState.IsKeyDown(Keys.S) && keyBoardState.IsKeyDown(Keys.W) && keyBoardState.IsKeyDown(Keys.A) && keyBoardState.IsKeyDown(Keys.D))
