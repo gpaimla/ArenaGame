@@ -192,7 +192,7 @@ namespace ArenaGame
                 }
                 // If the character is standing still but is not showing
                 // any animation at all then we'll default to facing down.
-                else if (currentAnimation == null)
+                else if (currentAnimation == null )
                 {
                     currentAnimation = standDown;
                 }
@@ -260,11 +260,22 @@ namespace ArenaGame
                 velocity.X = 0;
                 velocity.Normalize();
             }
-            if (keyBoardState.IsKeyDown(Keys.A) && keyBoardState.IsKeyDown(Keys.S) && keyBoardState.IsKeyDown(Keys.D))
+            if (keyBoardState.IsKeyDown(Keys.S) && keyBoardState.IsKeyDown(Keys.W) && keyBoardState.IsKeyDown(Keys.D))
             {
-                velocity.Y = 3;
-                velocity.X = 0;
+                velocity.Y = 0;
+                velocity.X = 3;
                 velocity.Normalize();
+            }
+            if (keyBoardState.IsKeyDown(Keys.S) && keyBoardState.IsKeyDown(Keys.W) && keyBoardState.IsKeyDown(Keys.A))
+            {
+                velocity.Y = 0;
+                velocity.X = -3;
+                velocity.Normalize();
+            }
+            if (keyBoardState.IsKeyDown(Keys.S) && keyBoardState.IsKeyDown(Keys.W) && keyBoardState.IsKeyDown(Keys.A) && keyBoardState.IsKeyDown(Keys.D))
+            {
+                velocity.Y = 0;
+                velocity.X = 0;
             }
             velocity *= desiredSpeed;
             previousState = keyBoardState;
