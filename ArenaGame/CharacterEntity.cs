@@ -273,14 +273,13 @@ namespace ArenaGame
         }
         public void Collision(Rectangle newRectangle, int xOffset, int yOffset)
         {
-            int fullX = (int)this.X;
-            int fullY = (int)this.Y;
-            Rectangle rect = new Rectangle(fullX,fullY, 16, 16);
+
+            Rectangle rect = new Rectangle((int)X,(int)Y, 16, 16);
 
 
             if (rect.TouchTopOf(newRectangle))
             {
-                this.Y = newRectangle.Y - rect.Height;
+                this.Y = newRectangle.Y - rect.Height -2 ;
             }
             if (rect.TouchLeftOf(newRectangle))
             {
@@ -293,7 +292,7 @@ namespace ArenaGame
 
             if (rect.TouchBottomOf(newRectangle))
             {
-                this.Y = newRectangle.Y + rect.Height;
+                this.Y = newRectangle.Y + rect.Height +2;
             }
 
             if(this.X < 0)
