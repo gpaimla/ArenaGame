@@ -77,13 +77,6 @@ namespace ArenaGame
             character.Update(gameTime);
             base.Update(gameTime);
 
-            //if (keyBoardState.IsKeyDown(Keys.F11))
-            //{
-            //    this.graphics.IsFullScreen = true;
-            //    this.graphics.ToggleFullScreen();
-            //    this.graphics.ApplyChanges();
-            //}
-
             checkKeyInput();
             graphics.ApplyChanges();
             

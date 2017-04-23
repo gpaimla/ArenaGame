@@ -183,16 +183,9 @@ namespace ArenaGame
 
             KeyboardState keyBoardState = Keyboard.GetState();
 
-            //TouchCollection touchCollection = TouchPanel.GetState();
-
-            //if (keyBoardState.IsKeyDown(Keys.Escape)) { Exit(); }
-                
-
-
             if (keyBoardState.IsKeyDown(Keys.W))
             {
-                //desiredVelocity.X = touchCollection[0].Position.X - this.X;
-                //desiredVelocity.Y = touchCollection[0].Position.Y - this.Y;
+
 
                 desiredVelocity.Y = -3;
 
