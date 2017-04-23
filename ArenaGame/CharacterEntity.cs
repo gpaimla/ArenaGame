@@ -97,6 +97,12 @@ namespace ArenaGame
 
         public void Update(GameTime gameTime)
         {
+
+            checkKeyInputs(gameTime);
+            currentAnimation.Update(gameTime);
+        }
+        void checkKeyInputs(GameTime gameTime)
+        {
             var velocity = GetDesiredVelocityFromInput();
 
             this.X += velocity.X * (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -177,8 +183,6 @@ namespace ArenaGame
                     currentAnimation = standDown;
                 }
             }
-
-            currentAnimation.Update(gameTime);
         }
 
         Vector2 GetDesiredVelocityFromInput()
@@ -269,28 +273,26 @@ namespace ArenaGame
         }
         public void Collision(Rectangle newRectangle, int xOffset, int yOffset)
         {
-            int fullX = (int)this.X;
-            int fullY = (int)this.Y;
-            Rectangle rect = new Rectangle(fullX,fullY, 16, 16);
+
+            Rectangle rect = new Rectangle((int)X, (int)Y, currentAnimation.CurrentRectangle.Width,currentAnimation.CurrentRectangle.Height);
 
 
             if (rect.TouchTopOf(newRectangle))
             {
-                this.Y = newRectangle.Y - rect.Height;
-                
+                this.Y = newRectangle.Y - rect.Height ;
             }
             if (rect.TouchLeftOf(newRectangle))
             {
-                this.X = newRectangle.X - rect.Width - 2;
+                this.X = newRectangle.X -16;
             }
             if (rect.TouchRightOf(newRectangle))
             {
-                this.X = newRectangle.X + rect.Width + 2;
+                this.X = newRectangle.X + newRectangle.Width + 2;
             }
 
             if (rect.TouchBottomOf(newRectangle))
             {
-                this.Y = newRectangle.Y + rect.Height + 2;
+                this.Y = newRectangle.Y + newRectangle.Height +6;
             }
 
             if(this.X < 0)
