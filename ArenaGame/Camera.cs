@@ -19,7 +19,7 @@ namespace ArenaGame
         private Vector2 center;
         private Viewport viewport;
 
-        private float zoom = 2;
+        private float zoom = 1;
 
         public float X
         {
@@ -77,8 +77,8 @@ namespace ArenaGame
             //transform = Matrix.CreateTranslation(new Vector3(-center.X + (viewport.Width / 2), -center.Y + (viewport.Height / 2), 0));
             //transform = Matrix.CreateTranslation(new Vector3(-center.X / 2, -center.Y / 2, 0)) *
             transform = Matrix.CreateTranslation(new Vector3(-center.X, -center.Y, 0)) *
-                                                 Matrix.CreateScale(new Vector3(Zoom, zoom, 0)) * 
-                                                 Matrix.CreateTranslation(new Vector3(-viewport.Width / 2, -viewport.Height / 2, 0));
+                                                 Matrix.CreateScale(new Vector3(Zoom, zoom, 0)); // * 
+                                                 //Matrix.CreateTranslation(new Vector3(-viewport.Width / 2, -viewport.Height / 2, 0));
         }
     }
 }
