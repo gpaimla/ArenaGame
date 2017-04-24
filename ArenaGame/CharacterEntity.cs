@@ -9,6 +9,8 @@ namespace ArenaGame
     public class CharacterEntity
     {
         static Texture2D characterSheetTexture;
+
+        //private Vector2 position = new Vector2();
         private const float desiredSpeed = 200;
         Animation walkDown;
         Animation walkUp;
@@ -35,7 +37,8 @@ namespace ArenaGame
             set;
         }
 
-        
+        //Vector2 position = new Vector2(this.x, y);
+
 
         public CharacterEntity(GraphicsDevice graphicsDevice)
         {
@@ -279,7 +282,7 @@ namespace ArenaGame
 
             if (rect.TouchTopOf(newRectangle))
             {
-                this.Y = newRectangle.Y - rect.Height ;
+                this.Y = newRectangle.Y - rect.Height;
             }
             if (rect.TouchLeftOf(newRectangle))
             {

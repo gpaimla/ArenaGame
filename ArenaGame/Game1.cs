@@ -19,6 +19,8 @@ namespace ArenaGame
         Map map;
         Map fenceMap;
 
+        Camera camera;
+
         CharacterEntity character;
         KeyboardState keyBoardState = Keyboard.GetState();
 
@@ -42,8 +44,8 @@ namespace ArenaGame
         protected override void Initialize()
         {
             character = new CharacterEntity(this.GraphicsDevice);
-            character.X = graphics.PreferredBackBufferWidth / 2;
-            character.Y = graphics.PreferredBackBufferHeight / 2;
+            //character.X = graphics.PreferredBackBufferWidth / 2;
+            //character.Y = graphics.PreferredBackBufferHeight / 2;
             map = new Map("Tile");
             fenceMap = new Map("Fence");
 
@@ -60,6 +62,8 @@ namespace ArenaGame
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Tiles.Content = Content;
+
+            camera = new Camera(GraphicsDevice.Viewport);
 
             map.Generate(new int[,]
             {
@@ -103,6 +107,7 @@ namespace ArenaGame
             foreach(CollisionTiles tile in fenceMap.CollisionTiles)
             {
                 character.Collision(tile.Rectangle, fenceMap.Width, fenceMap.Height);
+                camera.Update(character.X, character.Y, map.Width, map.Height);
             }
             base.Update(gameTime);
 
@@ -119,6 +124,15 @@ namespace ArenaGame
             {
                 graphics.ToggleFullScreen();
             }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.F10))
+            {
+                camera.Zoom = 2f;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.F9))
+            {
+                camera.Zoom = 1f;
+            }
         }
         /// <summary>
         /// This is called when the game should draw itself.
@@ -128,14 +142,14 @@ namespace ArenaGame
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // We'll start all of our drawing here:
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.Deferred,
+                BlendState.AlphaBlend,
+                null, null, null, null,
+                camera.Transform);
 
-            // Now we can do any entity rendering:
             map.Draw(spriteBatch);
             fenceMap.Draw(spriteBatch);
             character.Draw(spriteBatch);
-            // End renders all sprites to the screen:
             
             spriteBatch.End();
 
