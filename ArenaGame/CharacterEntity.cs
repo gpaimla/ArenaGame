@@ -13,6 +13,7 @@ namespace ArenaGame
         
         static private Texture2D characterBorder;
         private const float desiredSpeed = 200;
+
         Animation walkDown;
         Animation walkUp;
         Animation walkLeft;
@@ -296,20 +297,20 @@ namespace ArenaGame
 
             if (rect.TouchTopOf(newRectangle))
             {
-                this.Y = newRectangle.Top;
+                
             }
             if (rect.TouchLeftOf(newRectangle))
             {
-                this.X = newRectangle.Left;
+                this.X = newRectangle.Left-rect.Width;
             }
             if (rect.TouchRightOf(newRectangle))
             {
-                this.X = newRectangle.Right;
+               // this.X = newRectangle.Right;
             }
 
             if (rect.TouchBottomOf(newRectangle))
             {
-                this.Y = newRectangle.Bottom;
+              //  this.Y = newRectangle.Bottom;
             }
 
             if(this.X < 0)
