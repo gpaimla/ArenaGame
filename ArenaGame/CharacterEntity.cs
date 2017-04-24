@@ -60,47 +60,47 @@ namespace ArenaGame
             }
             if (characterBorder == null)
             {
-                characterBorder = new Texture2D(graphicsDevice, 16, 16);
+                characterBorder = new Texture2D(graphicsDevice, 64, 64);
                 characterBorder.CreateBorder(1, Color.Red);
                 
             }
 
             walkDown = new Animation();
-            walkDown.AddFrame(new Rectangle(0, 320, 16, 16), TimeSpan.FromSeconds(.25));
-            walkDown.AddFrame(new Rectangle(16, 320, 16, 16), TimeSpan.FromSeconds(.25));
-            walkDown.AddFrame(new Rectangle(0, 320, 16, 16), TimeSpan.FromSeconds(.25));
-            walkDown.AddFrame(new Rectangle(32, 320, 16, 16), TimeSpan.FromSeconds(.25));
+            walkDown.AddFrame(new Rectangle(0, 322, 64, 64), TimeSpan.FromSeconds(.25));
+            walkDown.AddFrame(new Rectangle(64, 322, 64, 64), TimeSpan.FromSeconds(.25));
+            walkDown.AddFrame(new Rectangle(0, 322, 64, 64), TimeSpan.FromSeconds(.25));
+            walkDown.AddFrame(new Rectangle(128, 322, 64, 64), TimeSpan.FromSeconds(.25));
 
             walkUp = new Animation();
-            walkUp.AddFrame(new Rectangle(144, 320, 64, 64), TimeSpan.FromSeconds(.25));
-            walkUp.AddFrame(new Rectangle(160, 320, 64, 64), TimeSpan.FromSeconds(.25));
-            walkUp.AddFrame(new Rectangle(144, 320, 64, 64), TimeSpan.FromSeconds(.25));
-            walkUp.AddFrame(new Rectangle(176, 320, 64, 64), TimeSpan.FromSeconds(.25));
+            walkUp.AddFrame(new Rectangle(576, 322, 64, 64), TimeSpan.FromSeconds(.25));
+            walkUp.AddFrame(new Rectangle(640, 322, 64, 64), TimeSpan.FromSeconds(.25));
+            walkUp.AddFrame(new Rectangle(576, 322, 64, 64), TimeSpan.FromSeconds(.25));
+            walkUp.AddFrame(new Rectangle(704, 322, 64, 64), TimeSpan.FromSeconds(.25));
 
             walkLeft = new Animation();
-            walkLeft.AddFrame(new Rectangle(48, 320, 64, 64), TimeSpan.FromSeconds(.25));
-            walkLeft.AddFrame(new Rectangle(64, 320, 64, 64), TimeSpan.FromSeconds(.25));
-            walkLeft.AddFrame(new Rectangle(48, 320, 64, 64), TimeSpan.FromSeconds(.25));
-            walkLeft.AddFrame(new Rectangle(80, 320, 64, 64), TimeSpan.FromSeconds(.25));
+            walkLeft.AddFrame(new Rectangle(192, 322, 64, 64), TimeSpan.FromSeconds(.25));
+            walkLeft.AddFrame(new Rectangle(256, 322, 64, 64), TimeSpan.FromSeconds(.25));
+            walkLeft.AddFrame(new Rectangle(192, 322, 64, 64), TimeSpan.FromSeconds(.25));
+            walkLeft.AddFrame(new Rectangle(320, 322, 64, 64), TimeSpan.FromSeconds(.25));
 
             walkRight = new Animation();
-            walkRight.AddFrame(new Rectangle(96, 320, 64, 64), TimeSpan.FromSeconds(.25));
-            walkRight.AddFrame(new Rectangle(112, 320, 64, 64), TimeSpan.FromSeconds(.25));
-            walkRight.AddFrame(new Rectangle(96, 320, 64, 64), TimeSpan.FromSeconds(.25));
-            walkRight.AddFrame(new Rectangle(128, 320, 64, 64), TimeSpan.FromSeconds(.25));
+            walkRight.AddFrame(new Rectangle(384, 322, 64, 64), TimeSpan.FromSeconds(.25));
+            walkRight.AddFrame(new Rectangle(448, 322, 64, 64), TimeSpan.FromSeconds(.25));
+            walkRight.AddFrame(new Rectangle(384, 322, 64, 64), TimeSpan.FromSeconds(.25));
+            walkRight.AddFrame(new Rectangle(512, 322, 64, 64), TimeSpan.FromSeconds(.25));
 
             // Standing animations only have a single frame of animation:
             standDown = new Animation();
-            standDown.AddFrame(new Rectangle(0, 320, 64, 64), TimeSpan.FromSeconds(.25));
+            standDown.AddFrame(new Rectangle(0, 322, 64, 64), TimeSpan.FromSeconds(.25));
 
             standUp = new Animation();
-            standUp.AddFrame(new Rectangle(144, 320, 64, 64), TimeSpan.FromSeconds(.25));
+            standUp.AddFrame(new Rectangle(576, 322, 64, 64), TimeSpan.FromSeconds(.25));
 
             standLeft = new Animation();
-            standLeft.AddFrame(new Rectangle(48, 320, 64, 64), TimeSpan.FromSeconds(.25));
+            standLeft.AddFrame(new Rectangle(192, 322, 64, 64), TimeSpan.FromSeconds(.25));
 
             standRight = new Animation();
-            standRight.AddFrame(new Rectangle(96, 320, 64, 64), TimeSpan.FromSeconds(.25));
+            standRight.AddFrame(new Rectangle(384, 322, 64, 64), TimeSpan.FromSeconds(.25));
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -318,14 +318,14 @@ namespace ArenaGame
                 this.X = 0;
             }
 
-            if(this.X + 16 > 1920)
+            if(this.X + 64 > 1920)
             {
-                this.X = 1920 - 16;
+                this.X = 1920 - 64;
             }
 
-            if (this.Y + 16> 1080)
+            if (this.Y + 64> 1080)
             {
-                this.Y = 1080 - 16;
+                this.Y = 1080 - 64;
             }
 
             if (this.Y < 0)
