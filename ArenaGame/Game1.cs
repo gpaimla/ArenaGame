@@ -43,6 +43,7 @@ namespace ArenaGame
         /// </summary>
         protected override void Initialize()
         {
+            CharacterEntity.Content = Content;
             character = new CharacterEntity(this.GraphicsDevice);
 
             //character.X = graphics.PreferredBackBufferWidth / 2;
@@ -64,7 +65,7 @@ namespace ArenaGame
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Tiles.Content = Content;
-
+            
             camera = new Camera(GraphicsDevice.Viewport);
 
             map.Generate(new int[,]
