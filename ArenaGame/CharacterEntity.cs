@@ -9,6 +9,7 @@ namespace ArenaGame
     public class CharacterEntity
     {
         static Texture2D characterSheetTexture;
+        static private Texture2D characterBorder;
         private const float desiredSpeed = 200;
         Animation walkDown;
         Animation walkUp;
@@ -46,6 +47,12 @@ namespace ArenaGame
                 {
                     characterSheetTexture = Texture2D.FromStream(graphicsDevice, stream);
                 }
+            }
+            if (characterBorder == null)
+            {
+                characterBorder = new Texture2D(graphicsDevice, 16, 16);
+                characterBorder.CreateBorder(1, Color.Red);
+                
             }
 
             walkDown = new Animation();
@@ -89,10 +96,11 @@ namespace ArenaGame
         public void Draw(SpriteBatch spriteBatch)
         {
             Vector2 topLeftOfSprite = new Vector2(this.X, this.Y);
-            Color tintColor = Color.White;
+
             var sourceRectangle = currentAnimation.CurrentRectangle;
 
             spriteBatch.Draw(characterSheetTexture, topLeftOfSprite, sourceRectangle, Color.White);
+            spriteBatch.Draw(characterBorder, new Vector2(X, Y), Color.White);
         }
 
         public void Update(GameTime gameTime)
@@ -279,20 +287,20 @@ namespace ArenaGame
 
             if (rect.TouchTopOf(newRectangle))
             {
-                this.Y = newRectangle.Y - rect.Height ;
+                this.Y = newRectangle.Top;
             }
             if (rect.TouchLeftOf(newRectangle))
             {
-                this.X = newRectangle.X -16;
+                this.X = newRectangle.Left;
             }
             if (rect.TouchRightOf(newRectangle))
             {
-                this.X = newRectangle.X + newRectangle.Width + 2;
+                this.X = newRectangle.Right;
             }
 
             if (rect.TouchBottomOf(newRectangle))
             {
-                this.Y = newRectangle.Y + newRectangle.Height +6;
+                this.Y = newRectangle.Bottom;
             }
 
             if(this.X < 0)
@@ -314,6 +322,35 @@ namespace ArenaGame
             {
                 this.Y = 0;
             }
+        }
+    }
+    static class Utilities
+    {
+        public static void CreateBorder(this Texture2D texture, int borderWidth, Color borderColor)
+        {
+            Color[] colors = new Color[texture.Width * texture.Height];
+
+            for (int x = 0; x < texture.Width; x++)
+            {
+                for (int y = 0; y < texture.Height; y++)
+                {
+                    bool colored = false;
+                    for (int i = 0; i <= borderWidth; i++)
+                    {
+                        if (x == i || y == i || x == texture.Width - 1 - i || y == texture.Height - 1 - i)
+                        {
+                            colors[x + y * texture.Width] = borderColor;
+                            colored = true;
+                            break;
+                        }
+                    }
+
+                    if (colored == false)
+                        colors[x + y * texture.Width] = Color.Transparent;
+                }
+            }
+
+            texture.SetData(colors);
         }
     }
 }

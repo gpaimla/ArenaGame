@@ -44,8 +44,8 @@ namespace ArenaGame
             character = new CharacterEntity(this.GraphicsDevice);
             character.X = graphics.PreferredBackBufferWidth / 2;
             character.Y = graphics.PreferredBackBufferHeight / 2;
-            map = new Map("Tile");
-            fenceMap = new Map("Fence");
+            map = new Map("Tile",GraphicsDevice);
+            fenceMap = new Map("Fence", GraphicsDevice);
 
             base.Initialize();
 
@@ -86,9 +86,9 @@ namespace ArenaGame
 
             fenceMap.Generate(new int[,]
 {               {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, },
-                {0, 0, 0, 0, 1, 1, 1, 1, 1, 1, },
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, },
             }, 64);
-
+            fenceMap.DrawBorder = true;
         }
 
         /// <summary>

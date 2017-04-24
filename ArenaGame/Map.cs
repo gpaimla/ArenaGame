@@ -28,10 +28,20 @@ namespace ArenaGame
         {
             get { return height; }
         }
+        
 
-        public Map(string tileName) {
+        public Map(string tileName, GraphicsDevice g) {
             tName = tileName;
+            DrawBorder = false;
+            this.g = g;
+            
+
         }
+        public Boolean DrawBorder
+        {
+            get;set;
+        }
+        private GraphicsDevice g;
 
 
 
@@ -45,7 +55,7 @@ namespace ArenaGame
 
                     if(number > 0)
                     {
-                        collisionTiles.Add(new CollisionTiles(number, new Rectangle(x * size, y * size, size, size), tName));
+                        collisionTiles.Add(new CollisionTiles(number, new Rectangle(x * size, y * size, size, size), tName,g));
 
                         width = (x + 1) * size;
                         height = (y + 1) * size;
@@ -57,6 +67,8 @@ namespace ArenaGame
         {
             foreach(CollisionTiles tile in collisionTiles)
             {
+
+                tile.DrawBorder = DrawBorder;
                 tile.Draw(spriteBatch);
             }
         }
