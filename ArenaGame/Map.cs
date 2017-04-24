@@ -30,10 +30,10 @@ namespace ArenaGame
         }
         
 
-        public Map(string tileName, GraphicsDevice g) {
+        public Map(string tileName, GraphicsDevice graphicsDevice) {
             tName = tileName;
             DrawBorder = false;
-            this.g = g;
+            this.graphicsDevice = graphicsDevice;
             
 
         }
@@ -41,7 +41,7 @@ namespace ArenaGame
         {
             get;set;
         }
-        private GraphicsDevice g;
+        private GraphicsDevice graphicsDevice;
 
 
 
@@ -55,7 +55,7 @@ namespace ArenaGame
 
                     if(number > 0)
                     {
-                        collisionTiles.Add(new CollisionTiles(number, new Rectangle(x * size, y * size, size, size), tName,g));
+                        collisionTiles.Add(new CollisionTiles(number, new Rectangle(x * size, y * size, size, size), tName,graphicsDevice));
 
                         width = (x + 1) * size;
                         height = (y + 1) * size;
