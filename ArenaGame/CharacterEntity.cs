@@ -10,8 +10,8 @@ namespace ArenaGame
     public class CharacterEntity
     {
         static Texture2D characterSheetTexture;
-        
         static private Texture2D characterBorder;
+
         private const float desiredSpeed = 200;
 
         Animation walkDown;
@@ -25,38 +25,22 @@ namespace ArenaGame
         Animation standRight;
 
         Animation currentAnimation;
+
         KeyboardState previousState;
 
-        private static ContentManager content;
-        public static ContentManager Content
-        {
-            protected get { return content; }
-            set { content = value; }
-        }
-        public float X
-        {
-            get;
-            set;
-        }
-
-        public float Y
-        {
-            get;
-            set;
-        }
-
-        
+        public static ContentManager Content { get; set; }
+        public float X{ get; set; }
+        public float Y{ get; set; }
+        private Vector2 velocity { get; set; }
+        public Rectangle CharacterBounds { get; set; }
 
         public CharacterEntity(GraphicsDevice graphicsDevice)
         {
             previousState = Keyboard.GetState();
+
             if (characterSheetTexture == null)
             {
-                //using (var stream = TitleContainer.OpenStream("Content/charactersheet64.png"))
-               
-                //{
-                    characterSheetTexture = Content.Load<Texture2D>("charactersheet64");
-                //}
+                characterSheetTexture = Content.Load<Texture2D>("charactersheet64");
             }
             if (characterBorder == null)
             {
@@ -105,12 +89,10 @@ namespace ArenaGame
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            Vector2 topLeftOfSprite = new Vector2(this.X, this.Y);
-
-            var sourceRectangle = currentAnimation.CurrentRectangle;
-
-            spriteBatch.Draw(characterSheetTexture, topLeftOfSprite, sourceRectangle, Color.White);
-            spriteBatch.Draw(characterBorder, new Vector2(X, Y), Color.White);
+            Vector2 topLeftOfSprite = new Vector2(X, Y);
+            
+            spriteBatch.Draw(characterSheetTexture, topLeftOfSprite, currentAnimation.CurrentRectangle, Color.White);
+            spriteBatch.Draw(characterBorder, topLeftOfSprite, Color.White);
         }
 
         public void Update(GameTime gameTime)
@@ -121,10 +103,12 @@ namespace ArenaGame
         }
         void checkKeyInputs(GameTime gameTime)
         {
-            var velocity = GetDesiredVelocityFromInput();
+            velocity = GetDesiredVelocityFromInput();
 
             this.X += velocity.X * (float)gameTime.ElapsedGameTime.TotalSeconds;
             this.Y += velocity.Y * (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            CharacterBounds = new Rectangle((int)X, (int)Y, characterSheetTexture.Width, characterSheetTexture.Height);
 
             // We can use the velocity variable to determine if the 
             // character is moving or standing still
@@ -292,7 +276,7 @@ namespace ArenaGame
         public void Collision(Rectangle newRectangle, int xOffset, int yOffset)
         {
 
-            Rectangle rect = new Rectangle((int)X, (int)Y, currentAnimation.CurrentRectangle.Width,currentAnimation.CurrentRectangle.Height);
+            Rectangle rect = CharacterBounds;
 
 
             if (rect.TouchTopOf(newRectangle))
@@ -305,12 +289,12 @@ namespace ArenaGame
             }
             if (rect.TouchRightOf(newRectangle))
             {
-               // this.X = newRectangle.Right;
+                this.X = newRectangle.Right;
             }
 
             if (rect.TouchBottomOf(newRectangle))
             {
-              //  this.Y = newRectangle.Bottom;
+                this.Y = newRectangle.Bottom;
             }
 
             if(this.X < 0)
