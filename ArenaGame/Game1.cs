@@ -24,6 +24,8 @@ namespace ArenaGame
         CharacterEntity character;
         KeyboardState keyBoardState = Keyboard.GetState();
 
+        SpriteFont font;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -67,6 +69,7 @@ namespace ArenaGame
             Tiles.Content = Content;
             
             camera = new Camera(GraphicsDevice.Viewport);
+            font = Content.Load<SpriteFont>("font");
 
             map.Generate(new int[,]
             {
@@ -154,10 +157,12 @@ namespace ArenaGame
             map.Draw(spriteBatch);
             fenceMap.Draw(spriteBatch);
             character.Draw(spriteBatch);
-            
+            spriteBatch.DrawString(font, "character.X: " + character.X, new Vector2(10, 10), Color.White);
+
             spriteBatch.End();
 
             base.Draw(gameTime);
         }
+
     }
 }
