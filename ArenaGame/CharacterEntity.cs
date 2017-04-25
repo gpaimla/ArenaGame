@@ -278,18 +278,10 @@ namespace ArenaGame
 
             Rectangle rect = new Rectangle((int)this.X, (int)this.Y, 66, 66);
 
-
-            if (rect.Intersects(newRectangle))
-            {
-                //this.X = this.X - 1;
-                //this.Y = this.Y - 1;
-            }
-
             if (rect.TouchTopOf(newRectangle))
             {
                 this.Y = newRectangle.Top - rect.Height;
             }
-
 
             if (rect.TouchBottomOf(newRectangle))
             {
@@ -304,19 +296,6 @@ namespace ArenaGame
             {
                 this.X = newRectangle.Left - rect.Width;
             }
-            //if (rect.TouchLeftOf(newRectangle))
-            //{
-            //    this.X = newRectangle.Left-rect.Width;
-            //}
-            //if (rect.TouchRightOf(newRectangle))
-            //{
-            //    this.X = newRectangle.Right;
-            //}
-
-            //if (rect.TouchBottomOf(newRectangle))
-            //{
-            //    this.Y = newRectangle.Bottom;
-            //}
 
             if (this.X < 0)
             {
