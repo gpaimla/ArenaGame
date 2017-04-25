@@ -166,13 +166,10 @@ namespace ArenaGame
             fenceMap.Draw(spriteBatch);
             character.Draw(spriteBatch);
 
-
+            spriteBatch.End();
             hudSpriteBatch.Begin();
             hud.Draw(hudSpriteBatch);
             hudSpriteBatch.End();
-
-            spriteBatch.End();
-
             base.Draw(gameTime);
         }
 
