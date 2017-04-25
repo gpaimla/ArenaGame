@@ -92,7 +92,7 @@ namespace ArenaGame
             Vector2 topLeftOfSprite = new Vector2(X, Y);
             
             spriteBatch.Draw(characterSheetTexture, topLeftOfSprite, currentAnimation.CurrentRectangle, Color.White);
-            spriteBatch.Draw(characterBorder, topLeftOfSprite, Color.White);
+            //spriteBatch.Draw(characterBorder, topLeftOfSprite, Color.White);
         }
 
         public void Update(GameTime gameTime)
@@ -280,7 +280,7 @@ namespace ArenaGame
 
             if (rect.TouchTopOf(newRectangle))
             {
-                Y = newRectangle.Top - rect.Height;
+                Y = newRectangle.Top - rect.Height + 7; //OLD DIDNT HAVE ADDED VALUE
             }
 
 
