@@ -61,10 +61,10 @@
 /processorParam:TextureFormat=Color
 /build:charactersheet64.png
 
-#begin font.spritefont
+#begin font04b08.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-/build:font.spritefont
+/build:font04b08.spritefont
 

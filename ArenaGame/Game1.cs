@@ -15,6 +15,7 @@ namespace ArenaGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        SpriteBatch hudSpriteBatch;
 
         Map map;
         Map fenceMap;
@@ -24,7 +25,7 @@ namespace ArenaGame
         CharacterEntity character;
         KeyboardState keyBoardState = Keyboard.GetState();
 
-        SpriteFont font;
+        HUD hud = new HUD();
 
         public Game1()
         {
@@ -66,10 +67,12 @@ namespace ArenaGame
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            hudSpriteBatch = new SpriteBatch(GraphicsDevice);
             Tiles.Content = Content;
             
             camera = new Camera(GraphicsDevice.Viewport);
-            font = Content.Load<SpriteFont>("font");
+
+            hud.LoadContent(Content);
 
             map.Generate(new int[,]
             {
@@ -114,12 +117,17 @@ namespace ArenaGame
             foreach(CollisionTiles tile in fenceMap.CollisionTiles)
             {
                 character.Collision(tile.Rectangle, fenceMap.Width, fenceMap.Height);
-                camera.Update(character.X, character.Y, map.Width, map.Height);
+                camera.Update(CharacterEntity.X, CharacterEntity.Y, map.Width, map.Height);
             }
             base.Update(gameTime);
 
             checkKeyInput();
             graphics.ApplyChanges();
+
+            //hud.PlayerPos = new Vector2(character.X, character.Y);
+
+            hud.Update(gameTime);
+            
             
         }
         void checkKeyInput()
@@ -157,7 +165,11 @@ namespace ArenaGame
             map.Draw(spriteBatch);
             fenceMap.Draw(spriteBatch);
             character.Draw(spriteBatch);
-            spriteBatch.DrawString(font, "character.X: " + character.X, new Vector2(10, 10), Color.White);
+
+
+            hudSpriteBatch.Begin();
+            hud.Draw(hudSpriteBatch);
+            hudSpriteBatch.End();
 
             spriteBatch.End();
 

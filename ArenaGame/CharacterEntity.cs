@@ -29,10 +29,10 @@ namespace ArenaGame
         KeyboardState previousState;
 
         public static ContentManager Content { get; set; }
-        public float X{ get; set; }
-        public float Y{ get; set; }
+        public static float X{ get; set; }
+        public static float Y { get; set; }
         private Vector2 velocity { get; set; }
-        public Rectangle CharacterBounds { get; set; }
+        public static Rectangle CharacterBounds { get; set; }
 
         public CharacterEntity(GraphicsDevice graphicsDevice)
         {
@@ -105,8 +105,8 @@ namespace ArenaGame
         {
             velocity = GetDesiredVelocityFromInput();
 
-            this.X += velocity.X * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            this.Y += velocity.Y * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            X += velocity.X * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            Y += velocity.Y * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             CharacterBounds = new Rectangle((int)X, (int)Y, characterSheetTexture.Width, characterSheetTexture.Height);
 
@@ -276,47 +276,47 @@ namespace ArenaGame
         public void Collision(Rectangle newRectangle, int xOffset, int yOffset)
         {
 
-            Rectangle rect = new Rectangle((int)this.X, (int)this.Y, 66, 66);
+            Rectangle rect = new Rectangle((int)X, (int)Y, 66, 66);
 
             if (rect.TouchTopOf(newRectangle))
             {
-                this.Y = newRectangle.Top - rect.Height;
+                Y = newRectangle.Top - rect.Height;
             }
 
 
             if (rect.TouchBottomOf(newRectangle))
             {
-                this.Y = newRectangle.Bottom + 2;
+                Y = newRectangle.Bottom + 2;
             }
 
             if (rect.TouchRightOf(newRectangle))
             {
-                this.X = newRectangle.Right + 2;
+                X = newRectangle.Right + 2;
             }
             if (rect.TouchLeftOf(newRectangle))
             {
-                this.X = newRectangle.Left - rect.Width;
+                X = newRectangle.Left - rect.Width;
             }
             
             //SCREEN EDGES
-            if (this.X < 0)
+            if (X < 0)
             {
-                this.X = 0;
+                X = 0;
             }
 
-            if(this.X + 64 > 1920)
+            if(X + 64 > 1920)
             {
-                this.X = 1920 - 64;
+                X = 1920 - 64;
             }
 
-            if (this.Y + 64> 1080)
+            if (Y + 64> 1080)
             {
-                this.Y = 1080 - 64;
+                Y = 1080 - 64;
             }
 
-            if (this.Y < 0)
+            if (Y < 0)
             {
-                this.Y = 0;
+                Y = 0;
             }
         }
     }
