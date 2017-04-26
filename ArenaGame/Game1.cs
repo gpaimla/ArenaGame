@@ -132,7 +132,7 @@ namespace ArenaGame
             foreach(CollisionTiles tile in fenceMap.CollisionTiles)
             {
                 character.Collision(tile.Rectangle, fenceMap.Width, fenceMap.Height);
-                camera.Update(CharacterEntity.X, CharacterEntity.Y, map.Width, map.Height);
+                camera.Update(CharacterEntity.X, CharacterEntity.Y, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
             }
             
 
