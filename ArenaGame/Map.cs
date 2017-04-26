@@ -68,7 +68,7 @@ namespace ArenaGame
             foreach(CollisionTiles tile in collisionTiles)
             {
 
-                //tile.DrawBorder = DrawBorder;
+                tile.DrawBorder = DrawBorder;
                 tile.Draw(spriteBatch);
             }
         }

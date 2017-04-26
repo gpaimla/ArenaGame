@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ArenaGame
 {
-    class Tiles
+    public class Tiles
     {
 
 
@@ -40,9 +40,9 @@ namespace ArenaGame
             spriteBatch.Draw(texture, rectangle, Color.White);
             if (DrawBorder)
             {
-                square = new Texture2D(gd, rectangle.Width, rectangle.Height);
+                square = new Texture2D(gd, 25, 25);
                 square.CreateBorder(1, Color.Red);
-                spriteBatch.Draw(square, new Vector2(rectangle.X, rectangle.Y), Color.White);
+                spriteBatch.Draw(square, new Vector2(rectangle.X+16, rectangle.Y+25), Color.White);
             }
         }
 

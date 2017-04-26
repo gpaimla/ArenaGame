@@ -92,7 +92,7 @@ namespace ArenaGame
             Vector2 topLeftOfSprite = new Vector2(X, Y);
             
             spriteBatch.Draw(characterSheetTexture, topLeftOfSprite, currentAnimation.CurrentRectangle, Color.White);
-            //spriteBatch.Draw(characterBorder, topLeftOfSprite, Color.White);
+            spriteBatch.Draw(characterBorder, topLeftOfSprite, Color.White);
         }
 
         public void Update(GameTime gameTime)
@@ -274,9 +274,9 @@ namespace ArenaGame
             previousState = keyBoardState;
             return velocity;
         }
-        public void Collision(Rectangle newRectangle, int xOffset, int yOffset)
+        public void Collision(Tiles tile, int xOffset, int yOffset)
         {
-
+            Rectangle newRectangle = new Rectangle(tile.Rectangle.X+16, tile.Rectangle.Y+16, 31, 31);
             Rectangle rect = new Rectangle((int)X, (int)Y, 66, 66);
 
             if (rect.TouchTopOf(newRectangle))

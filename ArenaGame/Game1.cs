@@ -139,6 +139,7 @@ namespace ArenaGame
 
             }, 62);
             fenceMap.DrawBorder = true;
+
         }
 
         /// <summary>
@@ -152,7 +153,7 @@ namespace ArenaGame
 
             foreach(CollisionTiles tile in fenceMap.CollisionTiles)
             {
-                character.Collision(tile.Rectangle, fenceMap.Width, fenceMap.Height);
+                character.Collision(tile, fenceMap.Width, fenceMap.Height);
             }
 
             camera.Update(CharacterEntity.X, CharacterEntity.Y, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
