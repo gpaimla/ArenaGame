@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -8,45 +9,22 @@ using System.Threading.Tasks;
 
 namespace ArenaGame
 {
-    class Map
+    public class Map
     {
-        private List<CollisionTiles> collisionTiles = new List<CollisionTiles>();
-
-        public List<CollisionTiles> CollisionTiles
+        CollidablesHolder collidablesHolder;
+        public static ContentManager Content;
+        public List<Tile> CollisionTiles{get;set;}
+        string tName;
+        public Map(string tileName)
         {
-            get { return collisionTiles; }
-        }
-
-        private int width, height;
-        private string tName;
-
-        public int Width
-        {
-            get { return width; }
-        }
-        public int Height
-        {
-            get { return height; }
+            tName = tileName;
+            collidablesHolder = new CollidablesHolder();
+            CollisionTiles = new List<Tile>();
         }
         
-
-        public Map(string tileName, GraphicsDevice graphicsDevice) {
-            tName = tileName;
-            DrawBorder = false;
-            this.graphicsDevice = graphicsDevice;
-            
-
-        }
-        public Boolean DrawBorder
-        {
-            get;set;
-        }
-        private GraphicsDevice graphicsDevice;
-
-
-
         public void Generate(int[,] map, int size)
         {
+
             for(int x = 0; x < map.GetLength(1); x++)
             {
                 for (int y = 0; y < map.GetLength(0); y++)
@@ -55,22 +33,49 @@ namespace ArenaGame
 
                     if(number > 0)
                     {
-                        collisionTiles.Add(new CollisionTiles(number, new Rectangle(x * size, y * size, size, size), tName,graphicsDevice));
-
-                        width = (x + 1) * size;
-                        height = (y + 1) * size;
+                        CollisionTiles.Add(collidablesHolder.getCollidable(tName,number,x,y,size));
                     }
                 }
             }
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            foreach(CollisionTiles tile in collisionTiles)
+            foreach(Tile tile in CollisionTiles)
             {
-
-                tile.DrawBorder = DrawBorder;
                 tile.Draw(spriteBatch);
             }
         }
+    }
+    class CollidablesHolder
+    {
+        private Dictionary<int, Tile> allCollidableTiles = new Dictionary<int, Tile>();
+        public CollidablesHolder()
+        {
+
+        }
+        public Tile getCollidable(string tName, int number, int x, int y, int size)
+        {
+            string name = tName + number.ToString();
+            switch (name)
+            {
+                case "Fence1":
+                    return new CollidableFence(Map.Content.Load<Texture2D>(tName + number), new Rectangle(x * size, y * size, size, size));
+
+                case "Fence2":
+                    return  new CollidableTree(Map.Content.Load<Texture2D>(tName + number), new Rectangle(x * size, y * size, size, size));
+
+                case "Fence3":
+                    return new CollidableTreeBorderTall(Map.Content.Load<Texture2D>(tName + number), new Rectangle(x * size, y * size, size, size));
+
+                case "Tile1":
+                    return new Tile(Map.Content.Load<Texture2D>(tName + number), new Rectangle(x * size, y * size, size, size));
+
+                case "Tile2":
+                    return new Tile(Map.Content.Load<Texture2D>(tName + number), new Rectangle(x * size, y * size, size, size));
+
+            }
+            return null;
+        }
+
     }
 }

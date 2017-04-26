@@ -51,8 +51,8 @@ namespace ArenaGame
 
             //character.X = graphics.PreferredBackBufferWidth / 2;
             //character.Y = graphics.PreferredBackBufferHeight / 2;
-            map = new Map("Tile",GraphicsDevice);
-            fenceMap = new Map("Fence", GraphicsDevice);
+            map = new Map("Tile");
+            fenceMap = new Map("Fence");
 
 
             base.Initialize();
@@ -68,7 +68,7 @@ namespace ArenaGame
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             hudSpriteBatch = new SpriteBatch(GraphicsDevice);
-            Tiles.Content = Content;
+            Map.Content = Content;
             
             camera = new Camera();
 
@@ -138,7 +138,7 @@ namespace ArenaGame
                 {3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, },
 
             }, 62);
-            fenceMap.DrawBorder = true;
+
 
         }
 
@@ -151,9 +151,9 @@ namespace ArenaGame
         {
             character.Update(gameTime);
 
-            foreach(CollisionTiles tile in fenceMap.CollisionTiles)
+            foreach(Tile tile in fenceMap.CollisionTiles)
             {
-                character.Collision(tile, fenceMap.Width, fenceMap.Height);
+                character.Collision(tile);
             }
 
             camera.Update(CharacterEntity.X, CharacterEntity.Y, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);

@@ -274,9 +274,9 @@ namespace ArenaGame
             previousState = keyBoardState;
             return velocity;
         }
-        public void Collision(Tiles tile, int xOffset, int yOffset)
+        public void Collision(Tile tile)
         {
-            Rectangle newRectangle = new Rectangle(tile.Rectangle.X+ 20, tile.Rectangle.Top+35, 25,25);
+            Rectangle newRectangle = tile.CollisionRectangle;
             Rectangle rect = new Rectangle((int)X, (int)Y, 66, 66);
 
             if (rect.TouchTopOf(newRectangle))
