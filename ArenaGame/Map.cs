@@ -45,7 +45,7 @@ namespace ArenaGame
 
 
 
-        public void Generate(int[,] map, int sizeX, int sizeY)
+        public void Generate(int[,] map, int size)
         {
             for(int x = 0; x < map.GetLength(1); x++)
             {
@@ -55,10 +55,10 @@ namespace ArenaGame
 
                     if(number > 0)
                     {
-                        collisionTiles.Add(new CollisionTiles(number, new Rectangle(x * spriteXY, y * spriteXY, spriteXY, spriteXY), tName,graphicsDevice));
+                        collisionTiles.Add(new CollisionTiles(number, new Rectangle(x * size, y * size, size, size), tName,graphicsDevice));
 
-                        width = (x + 1) * spriteXY;
-                        height = (y + 1) * spriteXY;
+                        width = (x + 1) * size;
+                        height = (y + 1) * size;
                     }
                 }
             }
