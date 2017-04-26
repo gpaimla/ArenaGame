@@ -12,7 +12,7 @@ namespace ArenaGame
         static Texture2D characterSheetTexture;
         static private Texture2D characterBorder;
 
-        private const float desiredSpeed = 200;
+        private const float desiredSpeed = 350;
 
         Animation walkDown;
         Animation walkUp;
