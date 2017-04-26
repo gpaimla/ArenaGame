@@ -49,6 +49,8 @@ namespace ArenaGame
             CharacterEntity.Content = Content;
             character = new CharacterEntity(this.GraphicsDevice);
 
+            //character.X = graphics.PreferredBackBufferWidth / 2;
+            //character.Y = graphics.PreferredBackBufferHeight / 2;
             map = new Map("Tile",GraphicsDevice);
             fenceMap = new Map("Fence", GraphicsDevice);
 
@@ -130,17 +132,13 @@ namespace ArenaGame
             foreach(CollisionTiles tile in fenceMap.CollisionTiles)
             {
                 character.Collision(tile.Rectangle, fenceMap.Width, fenceMap.Height);
-                camera.Update(CharacterEntity.X, CharacterEntity.Y, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
+                camera.Update(CharacterEntity.X, CharacterEntity.Y, map.Width, map.Height);
             }
             base.Update(gameTime);
 
             checkKeyInput();
-            graphics.ApplyChanges();
-
-
             hud.Update(gameTime);
-            
-            
+            graphics.ApplyChanges();
         }
         void checkKeyInput()
         {
