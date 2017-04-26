@@ -42,7 +42,7 @@ namespace ArenaGame
             {
                 
                 
-                spriteBatch.Draw(square, new Vector2(rectangle.X+20, rectangle.Y+31), Color.White);
+                spriteBatch.Draw(square, new Vector2(rectangle.X+20, rectangle.Top+35), Color.White);
             }
         }
 

@@ -276,7 +276,7 @@ namespace ArenaGame
         }
         public void Collision(Tiles tile, int xOffset, int yOffset)
         {
-            Rectangle newRectangle = new Rectangle(tile.Rectangle.X+ 20, tile.Rectangle.Y+ 31, 25,25);
+            Rectangle newRectangle = new Rectangle(tile.Rectangle.X+ 20, tile.Rectangle.Top+35, 25,25);
             Rectangle rect = new Rectangle((int)X, (int)Y, 66, 66);
 
             if (rect.TouchTopOf(newRectangle))
