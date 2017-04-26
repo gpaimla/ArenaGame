@@ -27,12 +27,11 @@ namespace ArenaGame
         Animation currentAnimation;
 
         KeyboardState previousState;
-
+        KeyboardState keyBoardState;
         public static ContentManager Content { get; set; }
         public static float X{ get; set; }
         public static float Y { get; set; }
         private Vector2 velocity { get; set; }
-        public static Rectangle CharacterBounds { get; set; }
 
         public CharacterEntity(GraphicsDevice graphicsDevice)
         {
@@ -108,7 +107,7 @@ namespace ArenaGame
             X += velocity.X * (float)gameTime.ElapsedGameTime.TotalSeconds;
             Y += velocity.Y * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            CharacterBounds = new Rectangle((int)X, (int)Y, characterSheetTexture.Width, characterSheetTexture.Height);
+            
 
             // We can use the velocity variable to determine if the 
             // character is moving or standing still
@@ -154,6 +153,7 @@ namespace ArenaGame
             }
             else
             {
+
                 // This else statement contains logic for if the
                 // character is standing still.
                 // First we are going to check if the character
@@ -191,7 +191,7 @@ namespace ArenaGame
         {
             Vector2 velocity = new Vector2();
 
-            KeyboardState keyBoardState = Keyboard.GetState();
+            keyBoardState = Keyboard.GetState();
 
 
             if (keyBoardState.IsKeyDown(Keys.W) && !previousState.IsKeyDown(Keys.S))

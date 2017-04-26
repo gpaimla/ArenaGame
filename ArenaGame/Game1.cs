@@ -70,7 +70,7 @@ namespace ArenaGame
             hudSpriteBatch = new SpriteBatch(GraphicsDevice);
             Tiles.Content = Content;
             
-            camera = new Camera(GraphicsDevice.Viewport);
+            camera = new Camera();
 
             hud.LoadContent(Content);
 
@@ -132,10 +132,9 @@ namespace ArenaGame
             foreach(CollisionTiles tile in fenceMap.CollisionTiles)
             {
                 character.Collision(tile.Rectangle, fenceMap.Width, fenceMap.Height);
-                camera.Update(CharacterEntity.X, CharacterEntity.Y, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
             }
-            
 
+            camera.Update(CharacterEntity.X, CharacterEntity.Y, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
             checkKeyInput();
             hud.Update(gameTime);
             graphics.ApplyChanges();
@@ -149,15 +148,6 @@ namespace ArenaGame
             if (Keyboard.GetState().IsKeyDown(Keys.F11))
             {
                 graphics.ToggleFullScreen();
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.F10))
-            {
-                camera.Zoom = 2f;
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.F9))
-            {
-                camera.Zoom = 1f;
             }
         }
         /// <summary>
