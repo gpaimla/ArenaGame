@@ -49,7 +49,7 @@ namespace ArenaGame
 
         public void Update(float x, float y, int xOffset, int yOffset)
         {
-            Vector2 position = new Vector2(x + 16 / 2 - xOffset / 2, y + 16 / 2 - yOffset / 2);
+            Vector2 position = new Vector2(x + 64 / 2 - xOffset / 2, y + 64 / 2 - yOffset / 2);
             center = new Vector2(position.X, position.Y);
 
             //if (position.X < viewport.Width / 2)

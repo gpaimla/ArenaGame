@@ -12,13 +12,14 @@ namespace ArenaGame
 {
     public class HUD
     {
-        private int screenWidth, screenHeight;
+        private Vector2 gameTimePosition;
         private Vector2 playerPosVec;
         private Vector2 playerPosPosition;
         private SpriteFont hudFont;
         private string playerPosTxt;
+        private string gameTimeTxt;
         private bool showHud;
-        private GraphicsDevice graphicsDevice;
+        
 
         public bool ShowHud
         {
@@ -39,11 +40,11 @@ namespace ArenaGame
             playerPosTxt = "X: " + playerPosVec.X + " Y: " + playerPosVec.Y;
             playerPosPosition.X = 10;
             playerPosPosition.Y = 10;
+            gameTimePosition.X = 10;
+            gameTimePosition.Y = 25;
 
+            gameTimeTxt = "Gametime: 16.6667";
             showHud = true;
-
-            screenWidth = 1920;
-            screenHeight = 1080;
         }
 
         public void LoadContent(ContentManager Content)
@@ -65,13 +66,13 @@ namespace ArenaGame
 
             playerPosVec = new Vector2(CharacterEntity.X, CharacterEntity.Y);
             playerPosTxt = "X: " + Math.Round(playerPosVec.X) + " Y: " + Math.Round(playerPosVec.Y);
-
         }
         public void Draw(SpriteBatch spriteBatch)
         {
             if(showHud)
             {
                 spriteBatch.DrawString(hudFont, playerPosTxt, playerPosPosition, Color.White);
+                spriteBatch.DrawString(hudFont, gameTimeTxt, gameTimePosition, Color.White);
             }
         }
     }
