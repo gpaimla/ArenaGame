@@ -137,13 +137,8 @@ namespace ArenaGame
             base.Update(gameTime);
 
             checkKeyInput();
-            graphics.ApplyChanges();
-
-            //hud.PlayerPos = new Vector2(character.X, character.Y);
-
             hud.Update(gameTime);
-            
-            
+            graphics.ApplyChanges();
         }
         void checkKeyInput()
         {
