@@ -134,11 +134,12 @@ namespace ArenaGame
                 character.Collision(tile.Rectangle, fenceMap.Width, fenceMap.Height);
                 camera.Update(CharacterEntity.X, CharacterEntity.Y, map.Width, map.Height);
             }
-            base.Update(gameTime);
+            
 
             checkKeyInput();
             hud.Update(gameTime);
             graphics.ApplyChanges();
+            base.Update(gameTime);
         }
         void checkKeyInput()
         {
