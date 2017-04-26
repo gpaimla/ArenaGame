@@ -14,7 +14,7 @@ namespace ArenaGame
 
 
         protected Texture2D texture;
-        private Texture2D square;
+        public Texture2D square;
         private Rectangle rectangle;
         public Rectangle Rectangle
         {
@@ -40,8 +40,8 @@ namespace ArenaGame
             spriteBatch.Draw(texture, rectangle, Color.White);
             if (DrawBorder)
             {
-                square = new Texture2D(gd, 25, 25);
-                square.CreateBorder(1, Color.Red);
+                
+                
                 spriteBatch.Draw(square, new Vector2(rectangle.X+20, rectangle.Y+31), Color.White);
             }
         }
@@ -53,7 +53,9 @@ namespace ArenaGame
         public CollisionTiles(int i, Rectangle newRectangle, string tName, GraphicsDevice g)
         {
             gd = g;
+            base.square = new Texture2D(gd, 25, 25);
             texture = Content.Load<Texture2D>(tName + i);
+            square.CreateBorder(1, Color.Red);
             this.Rectangle = newRectangle;
         }
     }

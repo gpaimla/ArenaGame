@@ -276,7 +276,7 @@ namespace ArenaGame
         }
         public void Collision(Tiles tile, int xOffset, int yOffset)
         {
-            Rectangle newRectangle = new Rectangle(tile.Rectangle.X+20, tile.Rectangle.Y+31, 25, 25);
+            Rectangle newRectangle = new Rectangle(tile.Rectangle.X+16, tile.Rectangle.Y+16, 25, 3);
             Rectangle rect = new Rectangle((int)X, (int)Y, 66, 66);
 
             if (rect.TouchTopOf(newRectangle))
@@ -304,6 +304,7 @@ namespace ArenaGame
     {
         public static void CreateBorder(this Texture2D texture, int borderWidth, Color borderColor)
         {
+            
             Color[] colors = new Color[texture.Width * texture.Height];
 
             for (int x = 0; x < texture.Width; x++)
