@@ -42,7 +42,7 @@ namespace ArenaGame
             {
                 square = new Texture2D(gd, 25, 25);
                 square.CreateBorder(1, Color.Red);
-                spriteBatch.Draw(square, new Vector2(rectangle.X+16, rectangle.Y+25), Color.White);
+                spriteBatch.Draw(square, new Vector2(rectangle.X+20, rectangle.Y+31), Color.White);
             }
         }
 
