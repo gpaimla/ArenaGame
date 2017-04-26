@@ -11,7 +11,7 @@ namespace ArenaGame
     {
         public static bool TouchTopOf(this Rectangle r1, Rectangle r2)
         {
-            return (r1.Bottom >= r2.Top + 5 && //OLD HAD VALUE OF -2 INSTEAD OF +5
+            return (r1.Bottom >= r2.Top - 2 && 
                     r1.Bottom <= r2.Top + (r2.Height / 2) &&
                     r1.Right >= r2.Left + (r2.Width / 5) &&
                     r1.Left <= r2.Right - (r2.Width / 5));
