@@ -280,7 +280,7 @@ namespace ArenaGame
 
             if (rect.TouchTopOf(newRectangle))
             {
-                Y = newRectangle.Top - rect.Height + 7; //OLD DIDNT HAVE ADDED VALUE
+                Y = newRectangle.Top - rect.Height;
             }
 
 
