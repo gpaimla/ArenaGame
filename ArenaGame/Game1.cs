@@ -16,6 +16,7 @@ namespace ArenaGame
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         SpriteBatch hudSpriteBatch;
+        SpriteBatch backgroundSpriteBatch;
 
         Map map;
         Map fenceMap;
@@ -26,6 +27,9 @@ namespace ArenaGame
         KeyboardState keyBoardState = Keyboard.GetState();
 
         HUD hud = new HUD();
+
+        Scrolling scrolling;
+
 
         public Game1()
         {
@@ -68,11 +72,15 @@ namespace ArenaGame
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             hudSpriteBatch = new SpriteBatch(GraphicsDevice);
+            backgroundSpriteBatch = new SpriteBatch(GraphicsDevice);
+
             Map.Content = Content;
             
             camera = new Camera();
 
             hud.LoadContent(Content);
+
+            scrolling = new Scrolling(Content.Load<Texture2D>("Backgrounds/Sky"), new Rectangle(0,0, 1920, 1080));
 
             map.Generate(new int[,]
             {
@@ -181,17 +189,25 @@ namespace ArenaGame
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+
+            backgroundSpriteBatch.Begin();
+            scrolling.Draw(backgroundSpriteBatch);
+            backgroundSpriteBatch.End();
+
+
             spriteBatch.Begin(SpriteSortMode.Deferred,
                 BlendState.AlphaBlend,
                 null, null, null, null,
                 camera.Transform);
 
+            
             map.Draw(spriteBatch);
             character.Draw(spriteBatch);
             fenceMap.Draw(spriteBatch);
             
 
             spriteBatch.End();
+
             hudSpriteBatch.Begin();
             hud.Draw(hudSpriteBatch);
             hudSpriteBatch.End();
