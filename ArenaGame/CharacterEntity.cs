@@ -47,8 +47,8 @@ namespace ArenaGame
                 characterBorder.CreateBorder(1, Color.Red);
                 
             }
-            X = 1920;
-            Y = 1080;
+            X = 1215;
+            Y = 831;
             walkDown = new Animation();
             walkDown.AddFrame(new Rectangle(0, 324, 64, 64), TimeSpan.FromSeconds(.25));
             walkDown.AddFrame(new Rectangle(64, 324, 64, 64), TimeSpan.FromSeconds(.25));

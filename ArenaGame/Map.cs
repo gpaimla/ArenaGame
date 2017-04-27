@@ -67,6 +67,10 @@ namespace ArenaGame
                 case "Fence3":
                     return new CollidableTreeBorderTall(Map.Content.Load<Texture2D>(tName + number), new Rectangle(x * size, y * size, size, size));
 
+                case "Fence4":
+                    return new CollidableTreeCherry(Map.Content.Load<Texture2D>(tName + number), new Rectangle(x * size, y * size, size, size));
+                    
+
                 case "Tile1":
                     return new Tile(Map.Content.Load<Texture2D>(tName + number), new Rectangle(x * size, y * size, size, size));
 

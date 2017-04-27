@@ -15,7 +15,8 @@ namespace ArenaGame
         {
             this.Texture2d = Texture2d;
             this.PictureRectangle = PictureRectangle;
-            this.CollisionRectangle = new Rectangle(PictureRectangle.X + 16, PictureRectangle.Y + PictureRectangle.Height / 2, 31, 31);
+            this.PictureRectangle = new Rectangle(PictureRectangle.X, PictureRectangle.Y, 64, 128);
+            this.CollisionRectangle = new Rectangle(PictureRectangle.X + 16, PictureRectangle.Y + PictureRectangle.Height / 2, 64, 94);
 
         }
     }
