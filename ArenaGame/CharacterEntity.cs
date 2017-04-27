@@ -47,8 +47,8 @@ namespace ArenaGame
                 characterBorder.CreateBorder(1, Color.Red);
                 
             }
-            X = 1215;
-            Y = 831;
+            X = 1460;
+            Y = 960;
             walkDown = new Animation();
             walkDown.AddFrame(new Rectangle(0, 324, 64, 64), TimeSpan.FromSeconds(.25));
             walkDown.AddFrame(new Rectangle(64, 324, 64, 64), TimeSpan.FromSeconds(.25));
@@ -92,7 +92,7 @@ namespace ArenaGame
             Vector2 topLeftOfSprite = new Vector2(X, Y);
             
             spriteBatch.Draw(characterSheetTexture, topLeftOfSprite, currentAnimation.CurrentRectangle, Color.White);
-            spriteBatch.Draw(characterBorder, topLeftOfSprite, Color.White);
+            //spriteBatch.Draw(characterBorder, topLeftOfSprite, Color.White);
         }
 
         public void Update(GameTime gameTime)
