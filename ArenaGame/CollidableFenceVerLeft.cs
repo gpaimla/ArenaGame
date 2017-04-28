@@ -9,14 +9,13 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace ArenaGame
 {
-    public class CollidableTreeBorderTall:Tile
+    public class CollidableFenceVerLeft : Tile
     {
-        public CollidableTreeBorderTall(Texture2D Texture2d, Rectangle PictureRectangle)
+        public CollidableFenceVerLeft(Texture2D Texture2d, Rectangle PictureRectangle)
         {
             this.Texture2d = Texture2d;
             this.PictureRectangle = new Rectangle(PictureRectangle.X, PictureRectangle.Y, 64, 64);
-            this.CollisionRectangle = new Rectangle(PictureRectangle.X + 16, PictureRectangle.Y + PictureRectangle.Height / 2, 64, 32);
-
+            this.CollisionRectangle = new Rectangle(PictureRectangle.X + (PictureRectangle.Width - 15) / 2, PictureRectangle.Y + PictureRectangle.Height / 2, 25, 64);
         }
     }
 }
