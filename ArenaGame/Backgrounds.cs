@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace ArenaGame
 {
-    //scrolling = new Scrolling(Content.Load<Texture2D>("Backgrounds/Sky"), new Rectangle(0,0, 1920, 1080));
     public class Backgrounds
     {
         public Texture2D texture;

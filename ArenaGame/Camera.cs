@@ -18,18 +18,6 @@ namespace ArenaGame
 
         private Vector2 center;
 
-        //public float X
-        //{
-        //    get { return center.X; }
-        //    set { center.X = value; }
-        //}
-
-        //public float Y
-        //{
-        //    get { return center.Y; }
-        //    set { center.Y = value; }
-        //}
-
         public void Update(float x, float y, int xOffset, int yOffset)
         {
             Vector2 position = new Vector2(x + 64 / 2 - xOffset / 2, y + 64 / 2 - yOffset / 2);
