@@ -29,7 +29,7 @@ namespace ArenaGame
 
         HUD hud = new HUD();
 
-        List<Layer> layers;
+        List<BackgroundScrollingLayer> layers;
 
         public Game1()
         {
@@ -57,13 +57,13 @@ namespace ArenaGame
             map = new Map("Tile");
             fenceMap = new Map("Collidables");
 
-            layers = new List<Layer> {
-                { new Layer(Content.Load<Texture2D>("Backgrounds/space"), new Rectangle(0, 0, 2048, 1536)) },
-                { new Layer(Content.Load<Texture2D>("Backgrounds/stars1"), new Rectangle(0, 0, 2560, 2560)) },
-                { new Layer(Content.Load<Texture2D>("Backgrounds/stars1"), new Rectangle(0, 0, 2560, 2560)) },
-                { new Layer(Content.Load<Texture2D>("Backgrounds/stars2"), new Rectangle(0, 0, 2560, 2560)) },
+            layers = new List<BackgroundScrollingLayer> {
+                { new BackgroundScrollingLayer(Content.Load<Texture2D>("Backgrounds/space"), new Rectangle(0, 0, 2048, 1536)) },
+                { new BackgroundScrollingLayer(Content.Load<Texture2D>("Backgrounds/stars1"), new Rectangle(0, 0, 2560, 2560)) },
+                { new BackgroundScrollingLayer(Content.Load<Texture2D>("Backgrounds/stars1"), new Rectangle(0, 0, 2560, 2560)) },
+                { new BackgroundScrollingLayer(Content.Load<Texture2D>("Backgrounds/stars2"), new Rectangle(0, 0, 2560, 2560)) },
             };
-
+            
             base.Initialize();
 
         }
@@ -172,10 +172,10 @@ namespace ArenaGame
             camera.Update(CharacterEntity.X, CharacterEntity.Y, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
             checkKeyInput();
             hud.Update(gameTime);
-            layers[0].scrolling.Update((int)CharacterEntity.X, (int)CharacterEntity.Y, 50);
-            layers[1].scrolling.Update((int)CharacterEntity.X, (int)CharacterEntity.Y, 10);
-            layers[2].scrolling.Update((int)CharacterEntity.X, (int)CharacterEntity.Y, 5);
-
+            layers[0].Update((int)CharacterEntity.X, (int)CharacterEntity.Y, 50);
+            layers[1].Update((int)CharacterEntity.X, (int)CharacterEntity.Y, 10);
+            layers[2].Update((int)CharacterEntity.X, (int)CharacterEntity.Y, 5);
+            
             graphics.ApplyChanges();
             base.Update(gameTime);
         }
@@ -200,7 +200,7 @@ namespace ArenaGame
 
 
             backgroundSpriteBatch.Begin();
-            foreach(Layer layer in layers) { layer.Draw(backgroundSpriteBatch); }
+            foreach(BackgroundScrollingLayer layer in layers) { layer.Draw(backgroundSpriteBatch); }
             backgroundSpriteBatch.End();
 
 

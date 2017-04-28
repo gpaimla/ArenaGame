@@ -43,7 +43,7 @@
   <ItemGroup>
     <Compile Include="Animation.cs" />
     <Compile Include="AnimationFrame.cs" />
-    <Compile Include="Backgrounds.cs" />
+    <Compile Include="BackgroundScrollingLayer.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="CharacterEntity.cs" />
     <Compile Include="CollidableFence.cs" />
