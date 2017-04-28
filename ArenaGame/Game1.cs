@@ -3,6 +3,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 #endregion
 
@@ -28,8 +29,7 @@ namespace ArenaGame
 
         HUD hud = new HUD();
 
-        Scrolling scrolling;
-
+        List<Layer> layers;
 
         public Game1()
         {
@@ -58,6 +58,12 @@ namespace ArenaGame
             map = new Map("Tile");
             fenceMap = new Map("Fence");
 
+            layers = new List<Layer>();
+            layers = new List<Layer> {
+                { new Layer(Content.Load<Texture2D>("Backgrounds/Sky"), new Rectangle(0, 0, 1920, 1080)) },
+                { new Layer(Content.Load<Texture2D>("Backgrounds/stars1"), new Rectangle(0, 0, 2560, 2560)) },
+                { new Layer(Content.Load<Texture2D>("Backgrounds/stars2"), new Rectangle(0, 0, 2560, 2560)) },
+            };
 
             base.Initialize();
 
@@ -79,8 +85,6 @@ namespace ArenaGame
             camera = new Camera();
 
             hud.LoadContent(Content);
-
-            scrolling = new Scrolling(Content.Load<Texture2D>("Backgrounds/Sky"), new Rectangle(0,0, 1920, 1080));
 
             map.Generate(new int[,]
             {
@@ -169,9 +173,10 @@ namespace ArenaGame
             camera.Update(CharacterEntity.X, CharacterEntity.Y, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
             checkKeyInput();
             hud.Update(gameTime);
+            layers[2].scrolling.Update();
+
             graphics.ApplyChanges();
             base.Update(gameTime);
-            //scrolling.Update();
         }
         void checkKeyInput()
         {
@@ -194,7 +199,7 @@ namespace ArenaGame
 
 
             backgroundSpriteBatch.Begin();
-            scrolling.Draw(backgroundSpriteBatch);
+            foreach(Layer layer in layers) { layer.Draw(backgroundSpriteBatch); }
             backgroundSpriteBatch.End();
 
 

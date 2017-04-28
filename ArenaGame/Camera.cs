@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ArenaGame
 {
-    class Camera
+    public class Camera
     {
         private Matrix transform;
         public Matrix Transform
@@ -18,24 +18,17 @@ namespace ArenaGame
 
         private Vector2 center;
 
-        public float X
-        {
-            get { return center.X; }
-            set { center.X = value; }
-        }
+        //public float X
+        //{
+        //    get { return center.X; }
+        //    set { center.X = value; }
+        //}
 
-        public float Y
-        {
-            get { return center.Y; }
-            set { center.Y = value; }
-        }
-
-
-
-        public  Camera()
-        {
-            
-        }
+        //public float Y
+        //{
+        //    get { return center.Y; }
+        //    set { center.Y = value; }
+        //}
 
         public void Update(float x, float y, int xOffset, int yOffset)
         {
@@ -43,7 +36,7 @@ namespace ArenaGame
             center = new Vector2(position.X, position.Y);
 
             transform = Matrix.CreateTranslation(new Vector3(-center.X, -center.Y, 0)) *
-                                                 Matrix.CreateScale(new Vector3(1, 1, 0)); // * 
+                                                 Matrix.CreateScale(new Vector3(1, 1, 0));
 
         }
     }
