@@ -58,16 +58,16 @@ namespace ArenaGame
             string name = tName + number.ToString();
             switch (name)
             {
-                case "Fence1":
+                case "Collidables1":
                     return new CollidableFence(Map.Content.Load<Texture2D>(tName + number), new Rectangle(x * size, y * size, size, size));
 
-                case "Fence2":
+                case "Collidables2":
                     return  new CollidableTree(Map.Content.Load<Texture2D>(tName + number), new Rectangle(x * size, y * size, size, size));
 
-                case "Fence3":
+                case "Collidables3":
                     return new CollidableTreeBorderTall(Map.Content.Load<Texture2D>(tName + number), new Rectangle(x * size, y * size, size, size));
 
-                case "Fence4":
+                case "Collidables4":
                     return new CollidableTreeCherry(Map.Content.Load<Texture2D>(tName + number), new Rectangle(x * size, y * size, size, size));
                     
 
