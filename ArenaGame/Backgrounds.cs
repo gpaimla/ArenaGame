@@ -30,9 +30,10 @@ namespace ArenaGame
             rectangle = newRectangle;
         }
 
-        public void Update()
+        public void Update(int xPos, int yPos, int amount)
         {
-            rectangle.X -= 1;
+            rectangle.X = -xPos / amount;
+            rectangle.Y = -yPos / amount;
         }
     }
 }

@@ -52,7 +52,6 @@ namespace ArenaGame
         {
             CharacterEntity.Content = Content;
             character = new CharacterEntity(this.GraphicsDevice);
-
             //character.X = graphics.PreferredBackBufferWidth / 2;
             //character.Y = graphics.PreferredBackBufferHeight / 2;
             map = new Map("Tile");
@@ -60,7 +59,8 @@ namespace ArenaGame
 
             layers = new List<Layer>();
             layers = new List<Layer> {
-                { new Layer(Content.Load<Texture2D>("Backgrounds/Sky"), new Rectangle(0, 0, 1920, 1080)) },
+                { new Layer(Content.Load<Texture2D>("Backgrounds/space"), new Rectangle(0, 0, 2048, 1536)) },
+                { new Layer(Content.Load<Texture2D>("Backgrounds/stars1"), new Rectangle(0, 0, 2560, 2560)) },
                 { new Layer(Content.Load<Texture2D>("Backgrounds/stars1"), new Rectangle(0, 0, 2560, 2560)) },
                 { new Layer(Content.Load<Texture2D>("Backgrounds/stars2"), new Rectangle(0, 0, 2560, 2560)) },
             };
@@ -173,7 +173,9 @@ namespace ArenaGame
             camera.Update(CharacterEntity.X, CharacterEntity.Y, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
             checkKeyInput();
             hud.Update(gameTime);
-            layers[2].scrolling.Update();
+            layers[0].scrolling.Update((int)CharacterEntity.X, (int)CharacterEntity.Y, 50);
+            layers[1].scrolling.Update((int)CharacterEntity.X, (int)CharacterEntity.Y, 10);
+            layers[2].scrolling.Update((int)CharacterEntity.X, (int)CharacterEntity.Y, 5);
 
             graphics.ApplyChanges();
             base.Update(gameTime);
@@ -195,7 +197,7 @@ namespace ArenaGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
 
             backgroundSpriteBatch.Begin();
