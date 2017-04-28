@@ -55,7 +55,7 @@ namespace ArenaGame
             //character.X = graphics.PreferredBackBufferWidth / 2;
             //character.Y = graphics.PreferredBackBufferHeight / 2;
             map = new Map("Tile");
-            fenceMap = new Map("Fence");
+            fenceMap = new Map("Collidables");
 
             layers = new List<Layer> {
                 { new Layer(Content.Load<Texture2D>("Backgrounds/space"), new Rectangle(0, 0, 2048, 1536)) },

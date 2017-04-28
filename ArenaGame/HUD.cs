@@ -35,15 +35,11 @@ namespace ArenaGame
 
         public HUD()
         {
-            playerPosVec.X = 0;
-            playerPosVec.Y = 0;
-            playerPosTxt = "X: " + playerPosVec.X + " Y: " + playerPosVec.Y;
             playerPosPosition.X = 10;
             playerPosPosition.Y = 10;
             gameTimePosition.X = 10;
             gameTimePosition.Y = 25;
 
-            gameTimeTxt = "Gametime: 16.6667";
             showHud = true;
         }
 
@@ -58,14 +54,10 @@ namespace ArenaGame
 
         public void Update(GameTime gametime)
         {
-            //KeyboardState keyState = Keyboard.GetState();
-            //if (keyState.IsKeyDown(Keys.Tab))
-            //{
-            //    showHud = !showHud;
-            //}
 
             playerPosVec = new Vector2(CharacterEntity.X, CharacterEntity.Y);
             playerPosTxt = "X: " + Math.Round(playerPosVec.X) + " Y: " + Math.Round(playerPosVec.Y);
+            gameTimeTxt = "GameTime in S: " + gametime.TotalGameTime.TotalSeconds;
         }
         public void Draw(SpriteBatch spriteBatch)
         {
