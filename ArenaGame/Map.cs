@@ -60,6 +60,11 @@ namespace ArenaGame
                 case "Collidables4":
                     return new CollidableTreeCherry(Map.Content.Load<Texture2D>(tName + number), new Rectangle(x * size, y * size, size, size));
 
+                case "Collidables5":
+                    return new CollidableFenceVerLeft(Map.Content.Load<Texture2D>(tName + number), new Rectangle(x * size, y * size, size, size));
+
+                case "Collidables6":
+                    return new CollidableFenceVerRight(Map.Content.Load<Texture2D>(tName + number), new Rectangle(x * size, y * size, size, size));
 
                 case "Tile1":
                     return new Tile(Map.Content.Load<Texture2D>(tName + number), new Rectangle(x * size, y * size, size, size));

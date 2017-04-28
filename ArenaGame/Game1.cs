@@ -57,9 +57,9 @@ namespace ArenaGame
             map = new Map("Tile");
             fenceMap = new Map("Collidables");
 
+
             layers = new List<BackgroundScrollingLayer> {
                 { new BackgroundScrollingLayer(Content.Load<Texture2D>("Backgrounds/space"), new Rectangle(0, 0, 2048, 1536)) },
-                { new BackgroundScrollingLayer(Content.Load<Texture2D>("Backgrounds/stars1"), new Rectangle(0, 0, 2560, 2560)) },
                 { new BackgroundScrollingLayer(Content.Load<Texture2D>("Backgrounds/stars1"), new Rectangle(0, 0, 2560, 2560)) },
                 { new BackgroundScrollingLayer(Content.Load<Texture2D>("Backgrounds/stars2"), new Rectangle(0, 0, 2560, 2560)) },
             };
