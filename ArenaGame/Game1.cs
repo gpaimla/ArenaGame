@@ -159,6 +159,7 @@ namespace ArenaGame
         protected override void Update(GameTime gameTime)
         {
             character.Update(gameTime);
+            
 
             foreach(Tile tile in fenceMap.CollisionTiles)
             {
@@ -170,6 +171,7 @@ namespace ArenaGame
             hud.Update(gameTime);
             graphics.ApplyChanges();
             base.Update(gameTime);
+            //scrolling.Update();
         }
         void checkKeyInput()
         {
@@ -181,6 +183,7 @@ namespace ArenaGame
                 graphics.ToggleFullScreen();
             }
         }
+
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
