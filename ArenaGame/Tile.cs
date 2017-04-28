@@ -14,7 +14,7 @@ namespace ArenaGame
         public Texture2D Texture2d { get; set; }
         public Rectangle PictureRectangle { get; set; }
         public Rectangle CollisionRectangle { get; set; }
-        public Texture2D square { get; set; }
+
 
         public  Tile(Texture2D Texture2d, Rectangle PictureRectangle)
         {
