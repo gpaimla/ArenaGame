@@ -57,7 +57,6 @@ namespace ArenaGame
             map = new Map("Tile");
             fenceMap = new Map("Fence");
 
-            layers = new List<Layer>();
             layers = new List<Layer> {
                 { new Layer(Content.Load<Texture2D>("Backgrounds/space"), new Rectangle(0, 0, 2048, 1536)) },
                 { new Layer(Content.Load<Texture2D>("Backgrounds/stars1"), new Rectangle(0, 0, 2560, 2560)) },
