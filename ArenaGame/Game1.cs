@@ -19,6 +19,10 @@ namespace ArenaGame
         SpriteBatch hudSpriteBatch;
         SpriteBatch backgroundSpriteBatch;
 
+        Texture2D customCursor;
+        MouseState mouse;
+        MouseState previousMouse;
+
         Map map;
         Map fenceMap;
 
@@ -50,10 +54,13 @@ namespace ArenaGame
         /// </summary>
         protected override void Initialize()
         {
+            graphics.SynchronizeWithVerticalRetrace = false;
+            IsFixedTimeStep = false;
+
             CharacterEntity.Content = Content;
             character = new CharacterEntity(this.GraphicsDevice);
-            //character.X = graphics.PreferredBackBufferWidth / 2;
-            //character.Y = graphics.PreferredBackBufferHeight / 2;
+
+
             map = new Map("Tile");
             fenceMap = new Map("Collidables");
 
@@ -76,6 +83,7 @@ namespace ArenaGame
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
+            customCursor = Content.Load<Texture2D>("cursor32");
             spriteBatch = new SpriteBatch(GraphicsDevice);
             hudSpriteBatch = new SpriteBatch(GraphicsDevice);
             backgroundSpriteBatch = new SpriteBatch(GraphicsDevice);
@@ -161,6 +169,8 @@ namespace ArenaGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            mouse = Mouse.GetState();
+
             character.Update(gameTime);
             
 
@@ -175,7 +185,9 @@ namespace ArenaGame
             layers[0].Update((int)CharacterEntity.X, (int)CharacterEntity.Y, 50);
             layers[1].Update((int)CharacterEntity.X, (int)CharacterEntity.Y, 10);
             layers[2].Update((int)CharacterEntity.X, (int)CharacterEntity.Y, 5);
-            
+
+            previousMouse = mouse;
+
             graphics.ApplyChanges();
             base.Update(gameTime);
         }
@@ -189,6 +201,7 @@ namespace ArenaGame
                 graphics.ToggleFullScreen();
             }
         }
+        
 
         /// <summary>
         /// This is called when the game should draw itself.
@@ -219,6 +232,7 @@ namespace ArenaGame
 
             hudSpriteBatch.Begin();
             hud.Draw(hudSpriteBatch);
+            hudSpriteBatch.Draw(customCursor, new Vector2(Mouse.GetState().X, Mouse.GetState().Y), Color.White);
             hudSpriteBatch.End();
             base.Draw(gameTime);
         }
