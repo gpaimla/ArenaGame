@@ -152,30 +152,6 @@
 /processorParam:TextureFormat=Color
 /build:Collidables3.png
 
-#begin ../../../../../Desktop/Textures/new/Fence5.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../../../../Desktop/Textures/new/Fence5.png
-
-#begin ../../../../../Desktop/Textures/new/Fence6.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../../../../Desktop/Textures/new/Fence6.png
-
 #begin Collidables5.png
 /importer:TextureImporter
 /processor:TextureProcessor
