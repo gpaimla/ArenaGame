@@ -3,7 +3,9 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
 
 #endregion
 
@@ -19,7 +21,6 @@ namespace ArenaGame
         SpriteBatch hudSpriteBatch;
         SpriteBatch backgroundSpriteBatch;
 
-        Texture2D customCursor;
         MouseState mouse;
         MouseState previousMouse;
 
@@ -43,7 +44,6 @@ namespace ArenaGame
             graphics.PreferredBackBufferHeight = 1080;
             graphics.IsFullScreen = true;
             graphics.ApplyChanges();
-
         }
 
         /// <summary>
@@ -54,8 +54,12 @@ namespace ArenaGame
         /// </summary>
         protected override void Initialize()
         {
-            graphics.SynchronizeWithVerticalRetrace = false;
-            IsFixedTimeStep = false;
+            this.IsMouseVisible = true;
+            //IsFixedTimeStep = false;
+            //TargetElapsedTime = TimeSpan.FromSeconds(1 / 144.0f);
+
+            //graphics.SynchronizeWithVerticalRetrace = false;
+            //IsFixedTimeStep = false;
 
             CharacterEntity.Content = Content;
             character = new CharacterEntity(this.GraphicsDevice);
@@ -82,8 +86,11 @@ namespace ArenaGame
         /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
-            customCursor = Content.Load<Texture2D>("cursor32");
+            Cursor myCursor = NativeMethods.LoadCustomCursor(@"Content\cursor.cur");
+            Form winForm = (Form)Form.FromHandle(this.Window.Handle);
+            winForm.Cursor = myCursor;
+
+
             spriteBatch = new SpriteBatch(GraphicsDevice);
             hudSpriteBatch = new SpriteBatch(GraphicsDevice);
             backgroundSpriteBatch = new SpriteBatch(GraphicsDevice);
@@ -193,10 +200,10 @@ namespace ArenaGame
         }
         void checkKeyInput()
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Escape))
                 this.Exit();
 
-            if (Keyboard.GetState().IsKeyDown(Keys.F11))
+            if (Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.F11))
             {
                 graphics.ToggleFullScreen();
             }
@@ -232,7 +239,6 @@ namespace ArenaGame
 
             hudSpriteBatch.Begin();
             hud.Draw(hudSpriteBatch);
-            hudSpriteBatch.Draw(customCursor, new Vector2(Mouse.GetState().X, Mouse.GetState().Y), Color.White);
             hudSpriteBatch.End();
             base.Draw(gameTime);
         }
