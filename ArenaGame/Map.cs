@@ -12,12 +12,12 @@ namespace ArenaGame
     public class Map
     {
         public static ContentManager Content;
-        public List<Tile> CollisionTiles{get;set;}
+        public List<Tile> Tiles{get;set;}
         string tName;
         public Map(string tileName)
         {
             tName = tileName;
-            CollisionTiles = new List<Tile>();
+            Tiles = new List<Tile>();
         }
         
         public void Generate(int[,] map, int size)
@@ -31,14 +31,14 @@ namespace ArenaGame
 
                     if(number > 0)
                     {
-                        CollisionTiles.Add(getCollidable(tName,number,x,y,size));
+                        Tiles.Add(getCollidable(tName,number,x,y,size));
                     }
                 }
             }
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            foreach(Tile tile in CollisionTiles)
+            foreach(Tile tile in Tiles)
             {
                 tile.Draw(spriteBatch);
             }

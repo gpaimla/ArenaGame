@@ -163,7 +163,7 @@ namespace ArenaGame
             character.Update(gameTime);
             
 
-            foreach(Tile tile in fenceMap.CollisionTiles)
+            foreach(Tile tile in fenceMap.Tiles)
             {
                 character.Collision(tile);
             }
