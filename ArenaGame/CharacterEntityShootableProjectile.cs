@@ -56,22 +56,22 @@ namespace ArenaGame
 
             if (rect.TouchTopOf(newRectangle))
             {
-                direction.Y *= - 1;
+                isProjectileDead = true;
             }
 
             if (rect.TouchBottomOf(newRectangle))
             {
-                direction.Y *= -1;
+                isProjectileDead = true;
             }
 
             if (rect.TouchRightOf(newRectangle))
             {
-                direction.X *= -1;
+                isProjectileDead = true;
 
             }
             if (rect.TouchLeftOf(newRectangle))
             {
-                direction.X *= -1;
+                isProjectileDead = true;
             }
         }
     }
