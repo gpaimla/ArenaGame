@@ -14,7 +14,7 @@ namespace ArenaGame
         public CollidableFence(Texture2D Texture2d, Rectangle PictureRectangle)
         {
             this.Texture2d = Texture2d;
-            this.PictureRectangle = new Rectangle(PictureRectangle.X, PictureRectangle.Y, 64, 64);
+            this.PictureRectangle = PictureRectangle;
             this.CollisionRectangle = new Rectangle(PictureRectangle.X - 32 + PictureRectangle.Width / 2, PictureRectangle.Y + PictureRectangle.Height / 2, 64, 32);     
         }
     }

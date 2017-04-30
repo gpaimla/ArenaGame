@@ -4,11 +4,15 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input.Touch;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Content;
+using System.Collections.Generic;
 
 namespace ArenaGame
 {
     public class CharacterEntity
     {
+        List<CharacterEntityShootableProjectile> Projectiles = new List<CharacterEntityShootableProjectile>();
+
+
         static Texture2D characterSheetTexture;
         static private Texture2D characterBorder;
 
@@ -26,16 +30,18 @@ namespace ArenaGame
 
         Animation currentAnimation;
 
+        MouseState oldState;
         KeyboardState previousState;
-        KeyboardState keyBoardState;
+
+        
         public static ContentManager Content { get; set; }
         public static float X{ get; set; }
         public static float Y { get; set; }
         private Vector2 velocity { get; set; }
+        public static Texture2D ProjectileTexture { get; set; }
 
         public CharacterEntity(GraphicsDevice graphicsDevice)
         {
-            previousState = Keyboard.GetState();
 
             if (characterSheetTexture == null)
             {
@@ -49,6 +55,12 @@ namespace ArenaGame
             }
             X = 1460;
             Y = 960;
+            initAnimations();
+            ProjectileTexture = Content.Load<Texture2D>("Projectile1");
+           
+        }
+        private void initAnimations()
+        {
             walkDown = new Animation();
             walkDown.AddFrame(new Rectangle(0, 324, 64, 64), TimeSpan.FromSeconds(.25));
             walkDown.AddFrame(new Rectangle(64, 324, 64, 64), TimeSpan.FromSeconds(.25));
@@ -86,12 +98,16 @@ namespace ArenaGame
             standRight = new Animation();
             standRight.AddFrame(new Rectangle(384, 324, 64, 64), TimeSpan.FromSeconds(.25));
         }
-
         public void Draw(SpriteBatch spriteBatch)
         {
             Vector2 topLeftOfSprite = new Vector2(X, Y);
             
             spriteBatch.Draw(characterSheetTexture, topLeftOfSprite, currentAnimation.CurrentRectangle, Color.White);
+            foreach (CharacterEntityShootableProjectile proj in Projectiles)
+            {
+                proj.Draw(spriteBatch);
+
+            }
             //spriteBatch.Draw(characterBorder, topLeftOfSprite, Color.White);
         }
 
@@ -99,7 +115,27 @@ namespace ArenaGame
         {
 
             checkKeyInputs(gameTime);
+            checkMouseInputShooting(gameTime);
             currentAnimation.Update(gameTime);
+            foreach (CharacterEntityShootableProjectile proj in Projectiles)
+            {
+                proj.Update(gameTime);
+
+            }
+
+        }
+        void checkMouseInputShooting(GameTime gameTime)
+        {
+            MouseState newState = Mouse.GetState();
+            if (newState.LeftButton == ButtonState.Pressed && oldState.LeftButton == ButtonState.Released)
+            {
+                CharacterEntityShootableProjectile projectile = new CharacterEntityShootableProjectile(new Vector2(X,Y),
+                    new Vector2(newState.X,newState.Y),
+                    ProjectileTexture);
+
+                Projectiles.Add(projectile);
+            }
+            oldState = newState;
         }
         void checkKeyInputs(GameTime gameTime)
         {
@@ -187,12 +223,11 @@ namespace ArenaGame
                 }
             }
         }
-
         Vector2 GetDesiredVelocityFromInput()
         {
             Vector2 velocity = new Vector2();
 
-            keyBoardState = Keyboard.GetState();
+            KeyboardState keyBoardState = Keyboard.GetState();
 
 
             if (keyBoardState.IsKeyDown(Keys.W) && !previousState.IsKeyDown(Keys.S))

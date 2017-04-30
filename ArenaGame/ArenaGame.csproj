@@ -46,6 +46,7 @@
     <Compile Include="BackgroundScrollingLayer.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="CharacterEntity.cs" />
+    <Compile Include="CharacterEntityShootableProjectile.cs" />
     <Compile Include="CollidableFence.cs" />
     <Compile Include="CollidableFenceVerRight.cs" />
     <Compile Include="CollidableTree.cs" />
