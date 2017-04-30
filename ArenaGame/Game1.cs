@@ -42,7 +42,7 @@ namespace ArenaGame
             Content.RootDirectory = "Content";
             graphics.PreferredBackBufferWidth = 1920;
             graphics.PreferredBackBufferHeight = 1080;
-            graphics.IsFullScreen = true;
+            graphics.IsFullScreen = false;
             graphics.ApplyChanges();
         }
 

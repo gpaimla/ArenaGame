@@ -15,12 +15,12 @@ namespace ArenaGame
         Vector2 direction;
         public CharacterEntityShootableProjectile(Vector2 bulletStartPos, Vector2 mousePos,Texture2D projectile)
         {
-            this.bulletStartPos = bulletStartPos;
+            this.bulletStartPos = new Vector2(820, 590);
             this.mousePos = mousePos;
             this.projectile = projectile;
             bulletPosition = bulletStartPos;
-            direction = mousePos - bulletStartPos;
-            if (direction != Vector2.Zero)
+            direction = mousePos - this.bulletStartPos;
+            if (direction != Vector2.Zero) 
                 direction.Normalize();
 
 
