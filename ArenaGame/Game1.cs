@@ -184,6 +184,11 @@ namespace ArenaGame
             foreach(Tile tile in fenceMap.Tiles)
             {
                 character.Collision(tile);
+                foreach(CharacterEntityShootableProjectile proj in character.Projectiles)
+                {
+                    proj.bulletCollision(tile);
+                }
+                
             }
 
             camera.Update(CharacterEntity.X, CharacterEntity.Y, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);

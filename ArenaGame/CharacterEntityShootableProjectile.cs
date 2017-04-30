@@ -42,7 +42,7 @@ namespace ArenaGame
             spriteBatch.Draw(projectile, bulletPosition, Color.White);
         }
 
-        public void Collision(Tile tile)
+        public void bulletCollision(Tile tile)
         {
             Rectangle newRectangle = tile.CollisionRectangle;
             Rectangle rect = new Rectangle((int)bulletPosition.X, (int)bulletPosition.Y, projectile.Width, projectile.Height);

@@ -10,7 +10,7 @@ namespace ArenaGame
 {
     public class CharacterEntity
     {
-        List<CharacterEntityShootableProjectile> Projectiles = new List<CharacterEntityShootableProjectile>();
+        public List<CharacterEntityShootableProjectile> Projectiles = new List<CharacterEntityShootableProjectile>();
         List<CharacterEntityShootableProjectile> projectilesToRemove = new List<CharacterEntityShootableProjectile>();
 
         static Texture2D characterSheetTexture;
