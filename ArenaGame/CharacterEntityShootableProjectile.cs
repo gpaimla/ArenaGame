@@ -35,5 +35,30 @@ namespace ArenaGame
         {
             spriteBatch.Draw(projectile, bulletPosition, Color.White);
         }
+
+        public void Collision(Tile tile)
+        {
+            Rectangle newRectangle = tile.CollisionRectangle;
+            Rectangle rect = new Rectangle(projectile.Height, pro;
+
+            if (rect.TouchTopOf(newRectangle))
+            {
+                Y = newRectangle.Top - rect.Height;
+            }
+
+            if (rect.TouchBottomOf(newRectangle))
+            {
+                Y = newRectangle.Bottom + 2;
+            }
+
+            if (rect.TouchRightOf(newRectangle))
+            {
+                X = newRectangle.Right + 2;
+            }
+            if (rect.TouchLeftOf(newRectangle))
+            {
+                X = newRectangle.Left - rect.Width;
+            }
+        }
     }
 }

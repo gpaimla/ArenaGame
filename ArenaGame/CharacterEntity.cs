@@ -319,7 +319,6 @@ namespace ArenaGame
                 Y = newRectangle.Top - rect.Height;
             }
 
-
             if (rect.TouchBottomOf(newRectangle))
             {
                 Y = newRectangle.Bottom + 2;
