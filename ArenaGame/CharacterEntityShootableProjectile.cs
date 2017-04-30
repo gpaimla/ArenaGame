@@ -15,7 +15,9 @@ namespace ArenaGame
         Vector2 direction;
         int timeToLive;
         public bool isProjectileDead { get; set; }
-        public CharacterEntityShootableProjectile(Vector2 bulletStartPos, Vector2 mousePos,Texture2D projectile)
+        static private Texture2D characterBorder;
+        GraphicsDevice g;
+        public CharacterEntityShootableProjectile(Vector2 bulletStartPos, Vector2 mousePos,Texture2D projectile, GraphicsDevice g)
         {
             this.bulletStartPos = new Vector2(960, 540);
             this.mousePos = mousePos;
@@ -24,7 +26,11 @@ namespace ArenaGame
             direction = this.mousePos - this.bulletStartPos;
             if (direction != Vector2.Zero) 
                 direction.Normalize();
-
+            if (characterBorder == null)
+            {
+                CharacterEntityShootableProjectile.characterBorder = characterBorder = new Texture2D(g, 64, 64);
+                CharacterEntityShootableProjectile.characterBorder.CreateBorder(1, Color.Red);
+            }
             isProjectileDead = false;
         }
         public void Update(GameTime gameTime)
@@ -40,6 +46,7 @@ namespace ArenaGame
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(projectile, bulletPosition, Color.White);
+            spriteBatch.Draw(characterBorder, new Rectangle((int)bulletPosition.X, (int)bulletPosition.Y, projectile.Width, projectile.Height), Color.White);
         }
 
         public void bulletCollision(Tile tile)

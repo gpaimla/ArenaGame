@@ -39,10 +39,10 @@ namespace ArenaGame
         public static float Y { get; set; }
         private Vector2 velocity { get; set; }
         public static Texture2D ProjectileTexture { get; set; }
-
+        GraphicsDevice graphicsDevice;
         public CharacterEntity(GraphicsDevice graphicsDevice)
         {
-
+            this.graphicsDevice = graphicsDevice;
             if (characterSheetTexture == null)
             {
                 characterSheetTexture = Content.Load<Texture2D>("charactersheet64");
@@ -147,7 +147,7 @@ namespace ArenaGame
             {
                 CharacterEntityShootableProjectile projectile = new CharacterEntityShootableProjectile(new Vector2(X,Y),
                     new Vector2(newState.X,newState.Y),
-                    ProjectileTexture);
+                    ProjectileTexture, graphicsDevice);
 
                 Projectiles.Add(projectile);
             }
