@@ -13,6 +13,8 @@ namespace ArenaGame
         Texture2D projectile;
         const float bulletVelocity = 0.8F;
         Vector2 direction;
+        int timeToLive;
+        public bool isProjectileDead { get; set; }
         public CharacterEntityShootableProjectile(Vector2 bulletStartPos, Vector2 mousePos,Texture2D projectile)
         {
             this.bulletStartPos = new Vector2(960, 540);
@@ -23,13 +25,17 @@ namespace ArenaGame
             if (direction != Vector2.Zero) 
                 direction.Normalize();
 
-
+            isProjectileDead = false;
         }
         public void Update(GameTime gameTime)
         {
 
             bulletPosition += direction * bulletVelocity*(float)gameTime.ElapsedGameTime.Milliseconds; // multiply by delta seconds to keep a consistent speed on all computers
-
+            timeToLive += 16;
+            if(timeToLive > 1600)
+            {
+                isProjectileDead = true;
+            }
         }
         public void Draw(SpriteBatch spriteBatch)
         {

@@ -11,7 +11,7 @@ namespace ArenaGame
     public class CharacterEntity
     {
         List<CharacterEntityShootableProjectile> Projectiles = new List<CharacterEntityShootableProjectile>();
-
+        List<CharacterEntityShootableProjectile> projectilesToRemove = new List<CharacterEntityShootableProjectile>();
 
         static Texture2D characterSheetTexture;
         static private Texture2D characterBorder;
@@ -119,14 +119,30 @@ namespace ArenaGame
             currentAnimation.Update(gameTime);
             foreach (CharacterEntityShootableProjectile proj in Projectiles)
             {
-                proj.Update(gameTime);
-
+                if (!proj.isProjectileDead)
+                {
+                    proj.Update(gameTime);
+                }
+                else
+                {
+                    projectilesToRemove.Add(proj);
+                }
             }
+            removeProjectiles();
 
+        }
+        void removeProjectiles()
+        {
+            foreach (CharacterEntityShootableProjectile proj in projectilesToRemove)
+            {
+                Projectiles.Remove(proj);
+            }
+            projectilesToRemove.Clear();
         }
         void checkMouseInputShooting(GameTime gameTime)
         {
             MouseState newState = Mouse.GetState();
+            //&& oldState.LeftButton == ButtonState.Released
             if (newState.LeftButton == ButtonState.Pressed )
             {
                 CharacterEntityShootableProjectile projectile = new CharacterEntityShootableProjectile(new Vector2(X,Y),
