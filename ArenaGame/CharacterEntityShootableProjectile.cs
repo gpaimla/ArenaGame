@@ -11,15 +11,15 @@ namespace ArenaGame
         Vector2 mousePos;
         Vector2 bulletPosition;
         Texture2D projectile;
-        const float bulletVelocity = 1.0F;
+        const float bulletVelocity = 0.8F;
         Vector2 direction;
         public CharacterEntityShootableProjectile(Vector2 bulletStartPos, Vector2 mousePos,Texture2D projectile)
         {
-            this.bulletStartPos = new Vector2(820, 590);
+            this.bulletStartPos = new Vector2(960, 540);
             this.mousePos = mousePos;
             this.projectile = projectile;
-            bulletPosition = bulletStartPos;
-            direction = mousePos - this.bulletStartPos;
+            this.bulletPosition = bulletStartPos;
+            direction = this.mousePos - this.bulletStartPos;
             if (direction != Vector2.Zero) 
                 direction.Normalize();
 
@@ -28,7 +28,7 @@ namespace ArenaGame
         public void Update(GameTime gameTime)
         {
 
-            bulletPosition += direction * bulletVelocity; // multiply by delta seconds to keep a consistent speed on all computers
+            bulletPosition += direction * bulletVelocity*(float)gameTime.ElapsedGameTime.Milliseconds; // multiply by delta seconds to keep a consistent speed on all computers
 
         }
         public void Draw(SpriteBatch spriteBatch)

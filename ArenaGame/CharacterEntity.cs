@@ -127,7 +127,7 @@ namespace ArenaGame
         void checkMouseInputShooting(GameTime gameTime)
         {
             MouseState newState = Mouse.GetState();
-            if (newState.LeftButton == ButtonState.Pressed && oldState.LeftButton == ButtonState.Released)
+            if (newState.LeftButton == ButtonState.Pressed )
             {
                 CharacterEntityShootableProjectile projectile = new CharacterEntityShootableProjectile(new Vector2(X,Y),
                     new Vector2(newState.X,newState.Y),
