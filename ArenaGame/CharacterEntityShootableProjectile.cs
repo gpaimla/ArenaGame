@@ -45,25 +45,25 @@ namespace ArenaGame
         public void Collision(Tile tile)
         {
             Rectangle newRectangle = tile.CollisionRectangle;
-            Rectangle rect = new Rectangle(projectile.Height, pro;
+            Rectangle rect = new Rectangle((int)bulletPosition.X, (int)bulletPosition.Y, projectile.Width, projectile.Height);
 
             if (rect.TouchTopOf(newRectangle))
             {
-                Y = newRectangle.Top - rect.Height;
+                bulletPosition.Y = newRectangle.Top - rect.Height;
             }
 
             if (rect.TouchBottomOf(newRectangle))
             {
-                Y = newRectangle.Bottom + 2;
+                bulletPosition.Y = newRectangle.Bottom + 2;
             }
 
             if (rect.TouchRightOf(newRectangle))
             {
-                X = newRectangle.Right + 2;
+                bulletPosition.X = newRectangle.Right + 2;
             }
             if (rect.TouchLeftOf(newRectangle))
             {
-                X = newRectangle.Left - rect.Width;
+                bulletPosition.X = newRectangle.Left - rect.Width;
             }
         }
     }
