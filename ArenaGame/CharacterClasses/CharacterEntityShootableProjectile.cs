@@ -16,7 +16,7 @@ namespace ArenaGame
         int timeToLive;
         public bool isProjectileDead { get; set; }
         static private Texture2D characterBorder;
-        GraphicsDevice g;
+
         public CharacterEntityShootableProjectile(Vector2 bulletStartPos, Vector2 mousePos,Texture2D projectile, GraphicsDevice g)
         {
             this.bulletStartPos = new Vector2(960, 540);
@@ -28,8 +28,8 @@ namespace ArenaGame
                 direction.Normalize();
             if (characterBorder == null)
             {
-                CharacterEntityShootableProjectile.characterBorder = characterBorder = new Texture2D(g, 64, 64);
-                CharacterEntityShootableProjectile.characterBorder.CreateBorder(1, Color.Red);
+                characterBorder = new Texture2D(g,64,64);
+                characterBorder.CreateBorder(1, Color.Red);
             }
             isProjectileDead = false;
         }

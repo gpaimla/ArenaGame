@@ -194,9 +194,10 @@ namespace ArenaGame
             camera.Update(CharacterEntity.X, CharacterEntity.Y, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
             checkKeyInput();
             hud.Update(gameTime);
-            layers[0].Update((int)CharacterEntity.X, (int)CharacterEntity.Y, 50);
+            layers[0].Update((int)CharacterEntity.X, (int)CharacterEntity.Y, 30);
             layers[1].Update((int)CharacterEntity.X, (int)CharacterEntity.Y, 10);
             layers[2].Update((int)CharacterEntity.X, (int)CharacterEntity.Y, 5);
+            layers[3].Update((int)CharacterEntity.X, (int)CharacterEntity.Y, 15);
 
             previousMouse = mouse;
 

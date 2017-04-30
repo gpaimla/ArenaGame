@@ -16,7 +16,6 @@ namespace ArenaGame
         public static Cursor LoadCustomCursor(string path)
         {
             IntPtr hCurs = LoadCursorFromFile(path);
-            if (hCurs == IntPtr.Zero) ; //throw new Win32Exception();
             var curs = new Cursor(hCurs);
             // Note: force the cursor to own the handle so it gets released properly
             var fi = typeof(Cursor).GetField("ownHandle", BindingFlags.NonPublic | BindingFlags.Instance);

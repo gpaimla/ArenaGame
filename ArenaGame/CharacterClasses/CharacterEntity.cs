@@ -56,7 +56,7 @@ namespace ArenaGame
             X = 1460;
             Y = 960;
             initAnimations();
-            ProjectileTexture = Content.Load<Texture2D>("Projectile1");
+            ProjectileTexture = Content.Load<Texture2D>("Projectiles/Projectile1");
            
         }
         private void initAnimations()

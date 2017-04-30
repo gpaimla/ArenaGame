@@ -59,28 +59,28 @@ namespace ArenaGame
             switch (name)
             {
                 case "Collidables1":
-                    return new CollidableFence(Map.Content.Load<Texture2D>(tName + number), new Rectangle(x * size, y * size, size, size));
+                    return new CollidableFence(Map.Content.Load<Texture2D>("Collidables/" + tName + number), new Rectangle(x * size, y * size, size, size));
 
                 case "Collidables2":
-                    return new CollidableTree(Map.Content.Load<Texture2D>(tName + number), new Rectangle(x * size, y * size, size, size));
+                    return new CollidableTree(Map.Content.Load<Texture2D>("Collidables/" + tName + number), new Rectangle(x * size, y * size, size, size));
 
                 case "Collidables3":
-                    return new CollidableTreeBorderTall(Map.Content.Load<Texture2D>(tName + number), new Rectangle(x * size, y * size, size, size));
+                    return new CollidableTreeBorderTall(Map.Content.Load<Texture2D>("Collidables/" + tName + number), new Rectangle(x * size, y * size, size, size));
 
                 case "Collidables4":
-                    return new CollidableTreeCherry(Map.Content.Load<Texture2D>(tName + number), new Rectangle(x * size, y * size, size, size));
+                    return new CollidableTreeCherry(Map.Content.Load<Texture2D>("Collidables/" + tName + number), new Rectangle(x * size, y * size, size, size));
 
                 case "Collidables5":
-                    return new CollidableFenceVerLeft(Map.Content.Load<Texture2D>(tName + number), new Rectangle(x * size, y * size, size, size));
+                    return new CollidableFenceVerLeft(Map.Content.Load<Texture2D>("Collidables/" + tName + number), new Rectangle(x * size, y * size, size, size));
 
                 case "Collidables6":
-                    return new CollidableFenceVerRight(Map.Content.Load<Texture2D>(tName + number), new Rectangle(x * size, y * size, size, size));
+                    return new CollidableFenceVerRight(Map.Content.Load<Texture2D>("Collidables/" + tName + number), new Rectangle(x * size, y * size, size, size));
 
                 case "Tile1":
-                    return new Tile(Map.Content.Load<Texture2D>(tName + number), new Rectangle(x * size, y * size, size, size));
+                    return new Tile(Map.Content.Load<Texture2D>("Tiles/" + tName + number), new Rectangle(x * size, y * size, size, size));
 
                 case "Tile2":
-                    return new Tile(Map.Content.Load<Texture2D>(tName + number), new Rectangle(x * size, y * size, size, size));
+                    return new Tile(Map.Content.Load<Texture2D>("Tiles/" + tName + number), new Rectangle(x * size, y * size, size, size));
 
             }
             return null;
