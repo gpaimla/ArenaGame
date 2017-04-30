@@ -65,8 +65,8 @@ namespace ArenaGame
             character = new CharacterEntity(this.GraphicsDevice);
 
 
-            map = new Map("Tile");
-            fenceMap = new Map("Collidables");
+            map = new Map("Tile", GraphicsDevice);
+            fenceMap = new Map("Collidables", GraphicsDevice);
 
             Texture2D stars1 = Content.Load<Texture2D>("Backgrounds/stars1");
             layers = new List<BackgroundScrollingLayer> {

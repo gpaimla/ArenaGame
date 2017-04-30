@@ -11,12 +11,21 @@ namespace ArenaGame
 {
     public class Map
     {
+        GraphicsDevice graphics;
         public static ContentManager Content;
         public List<Tile> Tiles{get;set;}
         string tName;
-        public Map(string tileName)
+        static private Texture2D characterBorder;
+        public Map(string tileName, GraphicsDevice graphics)
         {
             tName = tileName;
+            this.graphics = graphics;
+            if(characterBorder == null)
+            {
+                characterBorder = new Texture2D(graphics, 64, 64);
+                characterBorder.CreateBorder(1, Color.Red);
+            }
+            
             Tiles = new List<Tile>();
         }
         
@@ -41,6 +50,7 @@ namespace ArenaGame
             foreach(Tile tile in Tiles)
             {
                 tile.Draw(spriteBatch);
+                spriteBatch.Draw(characterBorder, tile.CollisionRectangle, Color.White);
             }
         }
         public Tile getCollidable(string tName, int number, int x, int y, int size)
