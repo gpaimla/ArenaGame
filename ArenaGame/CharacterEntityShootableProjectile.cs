@@ -49,21 +49,22 @@ namespace ArenaGame
 
             if (rect.TouchTopOf(newRectangle))
             {
-                bulletPosition.Y = newRectangle.Top - rect.Height;
+                direction.Y *= - 1;
             }
 
             if (rect.TouchBottomOf(newRectangle))
             {
-                bulletPosition.Y = newRectangle.Bottom + 2;
+                direction.Y *= -1;
             }
 
             if (rect.TouchRightOf(newRectangle))
             {
-                bulletPosition.X = newRectangle.Right + 2;
+                direction.X *= -1;
+
             }
             if (rect.TouchLeftOf(newRectangle))
             {
-                bulletPosition.X = newRectangle.Left - rect.Width;
+                direction.X *= -1;
             }
         }
     }
