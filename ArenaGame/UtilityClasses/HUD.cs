@@ -18,50 +18,31 @@ namespace ArenaGame
         private SpriteFont hudFont;
         private string playerPosTxt;
         private string gameTimeTxt;
-        private bool showHud;
-        
+        public bool ShowHud { get; set; }
 
-        public bool ShowHud
-        {
-            get { return showHud; }
-            set { showHud = value; }
-        }
-
-        public Vector2 PlayerPos
-        {
-            get { return playerPosVec; }
-            set { playerPosVec = value; }
-        }
 
         public HUD()
         {
-            playerPosPosition.X = 10;
-            playerPosPosition.Y = 10;
-            gameTimePosition.X = 10;
-            gameTimePosition.Y = 25;
+            playerPosPosition = new Vector2(10, 10);
+            gameTimePosition = new Vector2(10, 25);
 
-            showHud = true;
         }
 
         public void LoadContent(ContentManager Content)
         {
-            //04b08
-            
             hudFont = Content.Load<SpriteFont>("font04b08");
         }
 
-        //update
-
-        public void Update(GameTime gametime)
+        public void Update(GameTime gametime, float x, float y)
         {
 
-            playerPosVec = new Vector2(CharacterEntity.X, CharacterEntity.Y);
+            playerPosVec = new Vector2(x, y);
             playerPosTxt = "X: " + Math.Round(playerPosVec.X) + " Y: " + Math.Round(playerPosVec.Y);
             gameTimeTxt = "GameTime in S: " + gametime.TotalGameTime.TotalSeconds;
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            if(showHud)
+            if(ShowHud)
             {
                 spriteBatch.DrawString(hudFont, playerPosTxt, playerPosPosition, Color.White);
                 spriteBatch.DrawString(hudFont, gameTimeTxt, gameTimePosition, Color.White);

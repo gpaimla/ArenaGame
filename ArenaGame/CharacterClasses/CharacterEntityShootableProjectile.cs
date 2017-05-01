@@ -14,7 +14,7 @@ namespace ArenaGame
         const float bulletVelocity = 0.8F;
         Vector2 direction;
         int timeToLive;
-        public bool isProjectileDead { get; set; }
+        public bool IsProjectileDead { get; set; }
         static private Texture2D characterBorder;
 
         public CharacterEntityShootableProjectile(Vector2 bulletStartPos, Vector2 mousePos,Texture2D projectile, GraphicsDevice g)
@@ -23,15 +23,20 @@ namespace ArenaGame
             this.mousePos = mousePos;
             this.projectile = projectile;
             this.bulletPosition = bulletStartPos;
+            IsProjectileDead = false;
+
             direction = this.mousePos - this.bulletStartPos;
-            if (direction != Vector2.Zero) 
+            if (direction != Vector2.Zero)
+            {
                 direction.Normalize();
+            }  
+
             if (characterBorder == null)
             {
                 characterBorder = new Texture2D(g,64,64);
                 characterBorder.CreateBorder(1, Color.Red);
             }
-            isProjectileDead = false;
+            
         }
         public void Update(GameTime gameTime)
         {
@@ -40,7 +45,7 @@ namespace ArenaGame
             timeToLive += 16;
             if(timeToLive > 1600)
             {
-                isProjectileDead = true;
+                IsProjectileDead = true;
             }
         }
         public void Draw(SpriteBatch spriteBatch)
@@ -54,25 +59,11 @@ namespace ArenaGame
             Rectangle newRectangle = tile.CollisionRectangle;
             Rectangle rect = new Rectangle((int)bulletPosition.X, (int)bulletPosition.Y, projectile.Width, projectile.Height);
 
-            if (rect.TouchTopOf(newRectangle))
+            if (rect.TouchTopOf(newRectangle) || rect.TouchBottomOf(newRectangle) || rect.TouchRightOf(newRectangle)  || rect.TouchLeftOf(newRectangle))
             {
-                isProjectileDead = true;
+                IsProjectileDead = true;
             }
 
-            if (rect.TouchBottomOf(newRectangle))
-            {
-                isProjectileDead = true;
-            }
-
-            if (rect.TouchRightOf(newRectangle))
-            {
-                isProjectileDead = true;
-
-            }
-            if (rect.TouchLeftOf(newRectangle))
-            {
-                isProjectileDead = true;
-            }
         }
     }
 }

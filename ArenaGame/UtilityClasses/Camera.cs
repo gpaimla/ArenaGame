@@ -11,21 +11,15 @@ namespace ArenaGame
     public class Camera
     {
         private Matrix transform;
-        public Matrix Transform
-        {
-            get { return transform;  }
-        }
-
+        public Matrix Transform{get { return transform;  }}
         private Vector2 center;
 
         public void Update(float x, float y, int xOffset, int yOffset)
         {
-            Vector2 position = new Vector2(x + 64 / 2 - xOffset / 2, y + 64 / 2 - yOffset / 2);
-            center = new Vector2(position.X, position.Y);
+            center = new Vector2(x + 64 / 2 - xOffset / 2, y + 64 / 2 - yOffset / 2);
 
             transform = Matrix.CreateTranslation(new Vector3(-center.X, -center.Y, 0)) *
                                                  Matrix.CreateScale(new Vector3(1, 1, 0));
-
         }
     }
 }

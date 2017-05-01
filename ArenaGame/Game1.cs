@@ -21,8 +21,6 @@ namespace ArenaGame
         SpriteBatch hudSpriteBatch;
         SpriteBatch backgroundSpriteBatch;
 
-        MouseState mouse;
-        MouseState previousMouse;
 
         Map map;
         Map fenceMap;
@@ -55,25 +53,27 @@ namespace ArenaGame
         protected override void Initialize()
         {
             this.IsMouseVisible = true;
+
             //IsFixedTimeStep = false;
             //TargetElapsedTime = TimeSpan.FromSeconds(1 / 144.0f);
 
             //graphics.SynchronizeWithVerticalRetrace = false;
             //IsFixedTimeStep = false;
 
-            CharacterEntity.Content = Content;
-            character = new CharacterEntity(this.GraphicsDevice);
+            
+            character = new CharacterEntity(this.GraphicsDevice,Content);
 
 
             map = new Map("Tile", GraphicsDevice);
             fenceMap = new Map("Collidables", GraphicsDevice);
+            Map.Content = Content;
 
             Texture2D stars1 = Content.Load<Texture2D>("Backgrounds/stars1");
             layers = new List<BackgroundScrollingLayer> {
-                { new BackgroundScrollingLayer(Content.Load<Texture2D>("Backgrounds/space"), new Rectangle(0, 0, 2048, 1536)) },
-                { new BackgroundScrollingLayer(stars1, new Rectangle(0, 0, 2560, 2560)) },
-                { new BackgroundScrollingLayer(stars1, new Rectangle(0, 0, 2560, 2560)) },
-                { new BackgroundScrollingLayer(Content.Load<Texture2D>("Backgrounds/stars2"), new Rectangle(0, 0, 2560, 2560)) },
+                { new BackgroundScrollingLayer(Content.Load<Texture2D>("Backgrounds/space"), new Rectangle(0, 0, 2048, 1536),30) },
+                { new BackgroundScrollingLayer(stars1, new Rectangle(0, 0, 2560, 2560),10) },
+                { new BackgroundScrollingLayer(stars1, new Rectangle(0, 0, 2560, 2560),5) },
+                { new BackgroundScrollingLayer(Content.Load<Texture2D>("Backgrounds/stars2"), new Rectangle(0, 0, 2560, 2560),15) },
             };
             
             base.Initialize();
@@ -95,11 +95,11 @@ namespace ArenaGame
             hudSpriteBatch = new SpriteBatch(GraphicsDevice);
             backgroundSpriteBatch = new SpriteBatch(GraphicsDevice);
 
-            Map.Content = Content;
-            
             camera = new Camera();
 
             hud.LoadContent(Content);
+            hud.ShowHud = true;
+
 
             map.Generate(new int[,]
             {
@@ -132,8 +132,6 @@ namespace ArenaGame
                 {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, },
 
             }, 64);
-
-
             fenceMap.Generate(new int[,]
 {               {3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, },
                 {3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, },
@@ -164,7 +162,6 @@ namespace ArenaGame
                 {3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, },
 
             }, 64);
-            //fenceMap.DrawBorder = true;
 
 
         }
@@ -176,33 +173,38 @@ namespace ArenaGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            mouse = Mouse.GetState();
-
-            character.Update(gameTime);
-            
-
-            foreach(Tile tile in fenceMap.Tiles)
-            {
-                character.Collision(tile);
-                foreach(CharacterEntityShootableProjectile proj in character.Projectiles)
-                {
-                    proj.bulletCollision(tile);
-                }
-                
-            }
-
-            camera.Update(CharacterEntity.X, CharacterEntity.Y, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
             checkKeyInput();
-            hud.Update(gameTime);
-            layers[0].Update((int)CharacterEntity.X, (int)CharacterEntity.Y, 30);
-            layers[1].Update((int)CharacterEntity.X, (int)CharacterEntity.Y, 10);
-            layers[2].Update((int)CharacterEntity.X, (int)CharacterEntity.Y, 5);
-            layers[3].Update((int)CharacterEntity.X, (int)CharacterEntity.Y, 15);
+            
+            character.Update(gameTime);
+            hud.Update(gameTime,character.X,character.Y);
 
-            previousMouse = mouse;
+            parallexScrolling();
+            checkCollisionBetweenMapObjects();
+
+            camera.Update(character.X, character.Y, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
 
             graphics.ApplyChanges();
             base.Update(gameTime);
+        }
+        void parallexScrolling()
+        {
+            foreach (BackgroundScrollingLayer layer in layers)
+            {
+                layer.Update((int)character.X, (int)character.Y);
+            }
+
+        }
+        void checkCollisionBetweenMapObjects()
+        {
+            foreach (Tile tile in fenceMap.Tiles)
+            {
+                character.Collision(tile);
+                foreach (CharacterEntityShootableProjectile proj in character.Projectiles)
+                {
+                    proj.bulletCollision(tile);
+                }
+
+            }
         }
         void checkKeyInput()
         {

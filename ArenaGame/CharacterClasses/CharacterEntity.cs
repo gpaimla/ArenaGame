@@ -34,15 +34,18 @@ namespace ArenaGame
         KeyboardState previousState;
 
         
-        public static ContentManager Content { get; set; }
-        public static float X{ get; set; }
-        public static float Y { get; set; }
+        public ContentManager Content { get; set; }
+        public float X{ get; set; }
+        public float Y { get; set; }
         private Vector2 velocity { get; set; }
         public static Texture2D ProjectileTexture { get; set; }
         GraphicsDevice graphicsDevice;
-        public CharacterEntity(GraphicsDevice graphicsDevice)
+        public CharacterEntity(GraphicsDevice graphicsDevice,ContentManager Content)
         {
             this.graphicsDevice = graphicsDevice;
+            X = 1460;
+            Y = 960;
+            this.Content = Content;
             if (characterSheetTexture == null)
             {
                 characterSheetTexture = Content.Load<Texture2D>("charactersheet64");
@@ -53,8 +56,7 @@ namespace ArenaGame
                 characterBorder.CreateBorder(1, Color.Red);
                 
             }
-            X = 1460;
-            Y = 960;
+            
             initAnimations();
             ProjectileTexture = Content.Load<Texture2D>("Projectiles/Projectile1");
            
@@ -117,9 +119,16 @@ namespace ArenaGame
             checkKeyInputs(gameTime);
             checkMouseInputShooting(gameTime);
             currentAnimation.Update(gameTime);
+            updateProjectileTravel(gameTime);
+
+            removeProjectiles();
+
+        }
+        void updateProjectileTravel(GameTime gameTime)
+        {
             foreach (CharacterEntityShootableProjectile proj in Projectiles)
             {
-                if (!proj.isProjectileDead)
+                if (!proj.IsProjectileDead)
                 {
                     proj.Update(gameTime);
                 }
@@ -128,8 +137,6 @@ namespace ArenaGame
                     projectilesToRemove.Add(proj);
                 }
             }
-            removeProjectiles();
-
         }
         void removeProjectiles()
         {
@@ -337,12 +344,12 @@ namespace ArenaGame
 
             if (rect.TouchBottomOf(newRectangle))
             {
-                Y = newRectangle.Bottom + 2;
+                Y = newRectangle.Bottom;
             }
 
             if (rect.TouchRightOf(newRectangle))
             {
-                X = newRectangle.Right + 2;
+                X = newRectangle.Right;
             }
             if (rect.TouchLeftOf(newRectangle))
             {

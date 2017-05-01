@@ -14,19 +14,19 @@ namespace ArenaGame
         GraphicsDevice graphics;
         public static ContentManager Content;
         public List<Tile> Tiles{get;set;}
-        string tName;
+        string tileName;
         static private Texture2D characterBorder;
         public Map(string tileName, GraphicsDevice graphics)
         {
-            tName = tileName;
+            this.tileName = tileName;
             this.graphics = graphics;
-            if(characterBorder == null)
+            Tiles = new List<Tile>();
+
+            if (characterBorder == null)
             {
                 characterBorder = new Texture2D(graphics, 64, 64);
                 characterBorder.CreateBorder(1, Color.Red);
             }
-            
-            Tiles = new List<Tile>();
         }
         
         public void Generate(int[,] map, int size)
@@ -40,7 +40,7 @@ namespace ArenaGame
 
                     if(number > 0)
                     {
-                        Tiles.Add(getCollidable(tName,number,x,y,size));
+                        Tiles.Add(getCollidable(tileName, number,x,y,size));
                     }
                 }
             }
@@ -56,31 +56,32 @@ namespace ArenaGame
         public Tile getCollidable(string tName, int number, int x, int y, int size)
         {
             string name = tName + number.ToString();
+            Rectangle pictureRectangle = new Rectangle(x * size, y * size, size, size);
             switch (name)
             {
                 case "Collidables1":
-                    return new CollidableFence(Map.Content.Load<Texture2D>("Collidables/" + tName + number), new Rectangle(x * size, y * size, size, size));
+                    return new CollidableFence(Map.Content.Load<Texture2D>("Collidables/" + name), pictureRectangle);
 
                 case "Collidables2":
-                    return new CollidableTree(Map.Content.Load<Texture2D>("Collidables/" + tName + number), new Rectangle(x * size, y * size, size, size));
+                    return new CollidableTree(Map.Content.Load<Texture2D>("Collidables/" + name), pictureRectangle);
 
                 case "Collidables3":
-                    return new CollidableTreeBorderTall(Map.Content.Load<Texture2D>("Collidables/" + tName + number), new Rectangle(x * size, y * size, size, size));
+                    return new CollidableTreeBorderTall(Map.Content.Load<Texture2D>("Collidables/" + name), pictureRectangle);
 
                 case "Collidables4":
-                    return new CollidableTreeCherry(Map.Content.Load<Texture2D>("Collidables/" + tName + number), new Rectangle(x * size, y * size, size, size));
+                    return new CollidableTreeCherry(Map.Content.Load<Texture2D>("Collidables/" + name), pictureRectangle);
 
                 case "Collidables5":
-                    return new CollidableFenceVerLeft(Map.Content.Load<Texture2D>("Collidables/" + tName + number), new Rectangle(x * size, y * size, size, size));
+                    return new CollidableFenceVerLeft(Map.Content.Load<Texture2D>("Collidables/" + name), pictureRectangle);
 
                 case "Collidables6":
-                    return new CollidableFenceVerRight(Map.Content.Load<Texture2D>("Collidables/" + tName + number), new Rectangle(x * size, y * size, size, size));
+                    return new CollidableFenceVerRight(Map.Content.Load<Texture2D>("Collidables/" + name), pictureRectangle);
 
                 case "Tile1":
-                    return new Tile(Map.Content.Load<Texture2D>("Tiles/" + tName + number), new Rectangle(x * size, y * size, size, size));
+                    return new Tile(Map.Content.Load<Texture2D>("Tiles/" + name), pictureRectangle);
 
                 case "Tile2":
-                    return new Tile(Map.Content.Load<Texture2D>("Tiles/" + tName + number), new Rectangle(x * size, y * size, size, size));
+                    return new Tile(Map.Content.Load<Texture2D>("Tiles/" + name), pictureRectangle);
 
             }
             return null;
