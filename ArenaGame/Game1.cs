@@ -25,6 +25,7 @@ namespace ArenaGame
         Map map;
         Map fenceMap;
 
+
         Camera camera;
 
         CharacterEntity character;
@@ -203,7 +204,6 @@ namespace ArenaGame
                 {
                     proj.bulletCollision(tile);
                 }
-
             }
         }
         void checkKeyInput()
