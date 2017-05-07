@@ -13,8 +13,8 @@ namespace ArenaGame
             public CollidableChestSide(Texture2D Texture2d, Rectangle PictureRectangle)
             {
                 this.Texture2d = Texture2d;
-                this.PictureRectangle = PictureRectangle;
-                this.CollisionRectangle = new Rectangle(PictureRectangle.X + (PictureRectangle.Width) / 2, PictureRectangle.Y + PictureRectangle.Height / 2, 100, 64);
+                this.PictureRectangle = new Rectangle(PictureRectangle.X, PictureRectangle.Y, 100, 64);
+                this.CollisionRectangle = new Rectangle(PictureRectangle.X, PictureRectangle.Y, 100, 64);
             }
     }
 }
