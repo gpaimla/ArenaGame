@@ -76,15 +76,10 @@ namespace ArenaGame
 
                 case "Collidables6":
                     return new CollidableFenceVerRight(Map.Content.Load<Texture2D>("Collidables/" + name), pictureRectangle);
-
-                case "Tile1":
-                    return new Tile(Map.Content.Load<Texture2D>("Tiles/" + name), pictureRectangle);
-
-                case "Tile2":
+                default:
                     return new Tile(Map.Content.Load<Texture2D>("Tiles/" + name), pictureRectangle);
 
             }
-            return null;
         }
     }
 }
