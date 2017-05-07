@@ -206,7 +206,7 @@ namespace ArenaGame
                 }
                 //1726 4107
             }
-            Rectangle outOfBoundsRectangle = new Rectangle(0, 0, 4107, 1700);
+            Rectangle outOfBoundsRectangle = new Rectangle(0, 0, 4107, 1664);
             character.isOutOfBounds(outOfBoundsRectangle);
         }
         void checkKeyInput()
