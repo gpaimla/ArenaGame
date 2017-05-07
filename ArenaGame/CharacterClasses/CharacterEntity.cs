@@ -13,6 +13,9 @@ namespace ArenaGame
         public List<CharacterEntityShootableProjectile> Projectiles = new List<CharacterEntityShootableProjectile>();
         List<CharacterEntityShootableProjectile> projectilesToRemove = new List<CharacterEntityShootableProjectile>();
 
+        static TimeSpan shootingCooldown = TimeSpan.FromSeconds(1);
+        private TimeSpan? lastBulletShot;
+
         static Texture2D characterSheetTexture;
         static private Texture2D characterBorder;
 
@@ -149,14 +152,19 @@ namespace ArenaGame
         void checkMouseInputShooting(GameTime gameTime)
         {
             MouseState newState = Mouse.GetState();
+            
             //&& oldState.LeftButton == ButtonState.Released
-            if (newState.LeftButton == ButtonState.Pressed )
+            if (newState.LeftButton == ButtonState.Pressed  )
             {
-                CharacterEntityShootableProjectile projectile = new CharacterEntityShootableProjectile(new Vector2(X,Y),
+                if (lastBulletShot == null || gameTime.ElapsedGameTime - lastBulletShot >= shootingCooldown)
+                { 
+                    CharacterEntityShootableProjectile projectile = new CharacterEntityShootableProjectile(new Vector2(X,Y),
                     new Vector2(newState.X,newState.Y),
                     ProjectileTexture, graphicsDevice);
 
-                Projectiles.Add(projectile);
+                    Projectiles.Add(projectile);
+                    lastBulletShot = gameTime.ElapsedGameTime;
+                }
             }
             oldState = newState;
         }
