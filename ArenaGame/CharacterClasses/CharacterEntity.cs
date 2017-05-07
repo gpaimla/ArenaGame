@@ -332,9 +332,9 @@ namespace ArenaGame
             previousState = keyBoardState;
             return velocity;
         }
-        public void Collision(Tile tile)
+        public void Collision(Rectangle newRectangle)
         {
-            Rectangle newRectangle = tile.CollisionRectangle;
+
             Rectangle rect = new Rectangle((int)X, (int)Y, 66, 66);
 
             if (rect.TouchTopOf(newRectangle))
@@ -355,7 +355,33 @@ namespace ArenaGame
             {
                 X = newRectangle.Left - rect.Width;
             }
+
         }
+        public void isOutOfBounds(Rectangle boundRect)
+        {
+            Rectangle rect = new Rectangle((int)X, (int)Y, 66, 66);
+
+            if(rect.X < boundRect.X)
+            {
+                X = boundRect.X + 1;
+            }
+            if (rect.X > boundRect.Width)
+            {
+                X = boundRect.Width - 1;
+            }
+            if (rect.Y < boundRect.Y)
+            {
+                Y = boundRect.Y + 1;
+            }
+            if (rect.Y > boundRect.Height)
+            {
+                Y = boundRect.Height - 1;
+            }
+
+
+
+        }
+
     }
     static class Utilities
     {

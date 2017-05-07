@@ -65,8 +65,7 @@ namespace ArenaGame
                 case "Collidables2":
                     return new CollidableTree(Map.Content.Load<Texture2D>("Collidables/" + name), pictureRectangle);
 
-                case "Collidables3":
-                    return new CollidableTreeBorderTall(Map.Content.Load<Texture2D>("Collidables/" + name), pictureRectangle);
+                
 
                 case "Collidables4":
                     return new CollidableTreeCherry(Map.Content.Load<Texture2D>("Collidables/" + name), pictureRectangle);

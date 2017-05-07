@@ -140,18 +140,6 @@
 /processorParam:TextureFormat=Color
 /build:Collidables/Collidables2.png
 
-#begin Collidables/Collidables3.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Collidables/Collidables3.png
-
 #begin Collidables/Collidables4.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -187,6 +175,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Collidables/Collidables6.png
+
+#begin Tiles/Tile3.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Tiles/Tile3.png
 
 #begin Collidables/Collidables7.png
 /importer:TextureImporter
