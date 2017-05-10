@@ -35,6 +35,8 @@ namespace ArenaGame
 
         List<BackgroundScrollingLayer> layers;
 
+        List<NPC> npcs;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -70,7 +72,11 @@ namespace ArenaGame
                 { new BackgroundScrollingLayer(stars1, new Rectangle(0, 0, 2560, 2560),5) },
                 { new BackgroundScrollingLayer(Content.Load<Texture2D>("Backgrounds/stars2"), new Rectangle(0, 0, 2560, 2560),15) },
             };
-            
+
+            npcs = new List<NPC>();
+
+            npcs.Add(new NPC(Content.Load<Texture2D>("charactersheet64"), new Vector2(400, 630), new Rectangle(350, 625, 200, 100)));
+
             base.Initialize();
 
         }
@@ -178,6 +184,9 @@ namespace ArenaGame
 
             camera.Update(character.X, character.Y, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
 
+            //npcs.Update(gameTime);
+            foreach (NPC npc in npcs) { npc.Update(gameTime); }
+
             graphics.ApplyChanges();
             base.Update(gameTime);
         }
@@ -239,7 +248,7 @@ namespace ArenaGame
             character.Draw(spriteBatch);
             fenceMap.Draw(spriteBatch);
             
-
+            foreach(NPC npc in npcs) { npc.Draw(spriteBatch); }
             spriteBatch.End();
 
             hudSpriteBatch.Begin();
