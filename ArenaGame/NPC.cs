@@ -16,9 +16,10 @@ namespace ArenaGame
         public Rectangle npcBounds;
 
         public bool isVisible = true;
+        public bool isMoving;
 
         Random random = new Random();
-        int randX, randY;
+        int randX, randY, randM;
 
 
         Animation walkDown;
@@ -32,6 +33,12 @@ namespace ArenaGame
         Animation standRight;
 
         Animation currentAnimation;
+        private int timeToMove;
+        private int moveTime;
+        private int timeMoving;
+        private Vector2 prevVelocity;
+        private Vector2 initialVelocity;
+        private int moveCount;
 
         private void initAnimations()
         {
@@ -79,10 +86,11 @@ namespace ArenaGame
             position = newPosition;
             npcBounds = newNpcBounds;
 
-            randY = random.Next(-4, 4);
+            randY = random.Next(-2, 2);
             randX = random.Next(-2, 2);
 
-            velocity = new Vector2(randX, randY);
+            initialVelocity = new Vector2(randX, randY);
+            velocity = initialVelocity;
 
             initAnimations();
 
@@ -147,25 +155,53 @@ namespace ArenaGame
         }
         public void Update(GameTime gameTime)
         {
-            position += velocity;
-
-            currentAnimation.Update(gameTime);
-
-            if (position.Y <= npcBounds.Y || position.Y >= npcBounds.Y + npcBounds.Height || position.X <= npcBounds.X || position.X >= npcBounds.X + npcBounds.Width)
+            timeToMove += 16;
+            if (timeToMove > 1600)
             {
-                velocity.Y = -velocity.Y;
+                velocity = new Vector2(0, 0);
+                isMoving = false;
+
+                if (timeToMove > 5600)
+                {
+                    velocity = initialVelocity;
+                    isMoving = true;
+                    timeToMove = 0;
+                    moveCount += 1;
+                }
+                else
+                {
+                    timeToMove += 16;
+                }
+            }
+            if(isMoving)
+            {
+                position += velocity;
+
+                currentAnimation.Update(gameTime);
+                        
+                if (position.Y <= npcBounds.Y || position.Y >= npcBounds.Y + npcBounds.Height || position.X <= npcBounds.X || position.X >= npcBounds.X + npcBounds.Width)
+                {
+                    velocity.Y = -velocity.Y;
+                }
+
+                if (position.X <= npcBounds.X || position.X >= npcBounds.X + npcBounds.Width)
+                {
+                    velocity.X = -velocity.X;
+                }
             }
 
-            if (position.X <= npcBounds.X || position.X >= npcBounds.X + npcBounds.Width)
-            {
-                velocity.X = -velocity.X;
-            }
+
             checkMovement();
+
+            if(moveCount >= 2)
+            {
+                initialVelocity = new Vector2(random.Next(-2, 2), random.Next(-2, 2));
+                moveCount = 0;
+            }
         }
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, position, currentAnimation.CurrentRectangle, Color.White);
-            //spriteBatch.Draw(characterSheetTexture, topLeftOfSprite, currentAnimation.CurrentRectangle, Color.White);
         }
     }
 }
