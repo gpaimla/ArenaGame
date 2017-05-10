@@ -98,7 +98,6 @@ namespace ArenaGame
 
         public void checkMovement()
         {
-            bool isMoving = velocity != Vector2.Zero;
             if (isMoving)
             {
                 bool isMovingHorizontally = Math.Abs(velocity.X) > Math.Abs(velocity.Y);
