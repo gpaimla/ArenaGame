@@ -154,12 +154,11 @@ namespace ArenaGame
         public void Update(GameTime gameTime)
         {
 
-
             if (LastMovement == null || gameTime.TotalGameTime - LastMovement >= MovementCooldown)
             {
                 isMoving = !isMoving; 
                 LastMovement = gameTime.TotalGameTime;
-
+                velocity = new Vector2(random.Next(-2, 2), random.Next(-2, 2));
             }
             
           
