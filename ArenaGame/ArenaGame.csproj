@@ -46,6 +46,7 @@
     <Compile Include="CollidableObjectClasses\CollidableChestSide.cs" />
     <Compile Include="CollidableObjectClasses\CollidableChestVertical.cs" />
     <Compile Include="CollidableObjectClasses\CollidablesChestVerticalBot.cs" />
+    <Compile Include="Inventory.cs" />
     <Compile Include="UtilityClasses\BackgroundScrollingLayer.cs" />
     <Compile Include="UtilityClasses\Camera.cs" />
     <Compile Include="CharacterClasses\CharacterEntity.cs" />

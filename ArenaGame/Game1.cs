@@ -31,7 +31,7 @@ namespace ArenaGame
         CharacterEntity character;
         KeyboardState keyBoardState = Keyboard.GetState();
 
-        HUD hud = new HUD();
+        HUD hud;
 
         List<BackgroundScrollingLayer> layers;
 
@@ -55,15 +55,9 @@ namespace ArenaGame
         {
             this.IsMouseVisible = true;
 
-            //IsFixedTimeStep = false;
-            //TargetElapsedTime = TimeSpan.FromSeconds(1 / 144.0f);
+            hud = new HUD(GraphicsDevice);
 
-            //graphics.SynchronizeWithVerticalRetrace = false;
-            //IsFixedTimeStep = false;
-
-            
             character = new CharacterEntity(this.GraphicsDevice,Content);
-
 
             map = new Map("Tile", GraphicsDevice);
             fenceMap = new Map("Collidables", GraphicsDevice);
