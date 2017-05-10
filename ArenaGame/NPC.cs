@@ -12,14 +12,16 @@ namespace ArenaGame
     {
         public Texture2D texture;
         public Vector2 position;
-        public Vector2 velocity;
         public Rectangle npcBounds;
 
         public bool isVisible = true;
         public bool isMoving;
 
-        Random random = new Random();
-        int randX, randY, randM;
+        Random random;
+
+        static TimeSpan MovementCooldown = TimeSpan.FromSeconds(5);
+        private TimeSpan? LastMovement;
+        private TimeSpan? NewMovement;
 
 
         Animation walkDown;
@@ -33,12 +35,9 @@ namespace ArenaGame
         Animation standRight;
 
         Animation currentAnimation;
-        private int timeToMove;
-        private int moveTime;
-        private int timeMoving;
-        private Vector2 prevVelocity;
-        private Vector2 initialVelocity;
-        private int moveCount;
+
+        private Vector2 velocity;
+
 
         private void initAnimations()
         {
@@ -82,15 +81,14 @@ namespace ArenaGame
 
         public NPC(Texture2D newTexture, Vector2 newPosition, Rectangle newNpcBounds)
         {
+            random = new Random();
+            velocity = new Vector2(random.Next(-2, 2), random.Next(-2, 2));
             texture = newTexture;
             position = newPosition;
             npcBounds = newNpcBounds;
 
-            randY = random.Next(-2, 2);
-            randX = random.Next(-2, 2);
-
-            initialVelocity = new Vector2(randX, randY);
-            velocity = initialVelocity;
+            
+        
 
             initAnimations();
 
@@ -155,30 +153,22 @@ namespace ArenaGame
         }
         public void Update(GameTime gameTime)
         {
-            timeToMove += 16;
-            if (timeToMove > 1600)
-            {
-                velocity = new Vector2(0, 0);
-                isMoving = false;
 
-                if (timeToMove > 5600)
-                {
-                    velocity = initialVelocity;
-                    isMoving = true;
-                    timeToMove = 0;
-                    moveCount += 1;
-                }
-                else
-                {
-                    timeToMove += 16;
-                }
+
+            if (LastMovement == null || gameTime.TotalGameTime - LastMovement >= MovementCooldown)
+            {
+                isMoving = !isMoving; 
+                LastMovement = gameTime.TotalGameTime;
+
             }
-            if(isMoving)
+            
+          
+            if (isMoving)
             {
                 position += velocity;
 
                 currentAnimation.Update(gameTime);
-                        
+
                 if (position.Y <= npcBounds.Y || position.Y >= npcBounds.Y + npcBounds.Height || position.X <= npcBounds.X || position.X >= npcBounds.X + npcBounds.Width)
                 {
                     velocity.Y = -velocity.Y;
@@ -190,14 +180,7 @@ namespace ArenaGame
                 }
             }
 
-
             checkMovement();
-
-            if(moveCount >= 2)
-            {
-                initialVelocity = new Vector2(random.Next(-2, 2), random.Next(-2, 2));
-                moveCount = 0;
-            }
         }
         public void Draw(SpriteBatch spriteBatch)
         {
