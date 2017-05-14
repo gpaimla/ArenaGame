@@ -77,9 +77,9 @@ namespace ArenaGame
 
             npcs = new List<NPC>();
 
-            npcs.Add(new NPC(Content.Load<Texture2D>("charactersheet64"), new Vector2(400, 630), new Rectangle(350, 625, 200, 100)));
-            npcs.Add(new NPC(Content.Load<Texture2D>("charactersheet64"), new Vector2(150, 900), new Rectangle(100, 800, 100, 200)));
-            npcs.Add(new NPC(Content.Load<Texture2D>("charactersheet64"), new Vector2(400, 1000), new Rectangle(250, 900, 300, 100)));
+            npcs.Add(new NPC(Content.Load<Texture2D>("Characters/knight"), new Vector2(400, 630), new Rectangle(350, 625, 200, 100)));
+            npcs.Add(new NPC(Content.Load<Texture2D>("Characters/warrior"), new Vector2(160, 900), new Rectangle(150, 800, 100, 200)));
+            npcs.Add(new NPC(Content.Load<Texture2D>("Characters/wizard"), new Vector2(450, 1050), new Rectangle(300, 900, 200, 190)));
 
             base.Initialize();
 

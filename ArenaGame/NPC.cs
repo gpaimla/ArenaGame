@@ -17,9 +17,9 @@ namespace ArenaGame
         public bool isVisible = true;
         public bool isMoving;
 
-        Random random;
+        private Random random;
 
-        static TimeSpan MovementCooldown = TimeSpan.FromSeconds(5);
+        private TimeSpan MovementCooldown;// = TimeSpan.FromSeconds(random.Next(3, 8));
         private TimeSpan? LastMovement;
         private TimeSpan? NewMovement;
 
@@ -42,41 +42,41 @@ namespace ArenaGame
         private void initAnimations()
         {
             walkDown = new Animation();
-            walkDown.AddFrame(new Rectangle(0, 324, 64, 64), TimeSpan.FromSeconds(.25));
-            walkDown.AddFrame(new Rectangle(64, 324, 64, 64), TimeSpan.FromSeconds(.25));
-            walkDown.AddFrame(new Rectangle(0, 324, 64, 64), TimeSpan.FromSeconds(.25));
-            walkDown.AddFrame(new Rectangle(128, 324, 64, 64), TimeSpan.FromSeconds(.25));
+            walkDown.AddFrame(new Rectangle(0, 0, 64, 64), TimeSpan.FromSeconds(.25));
+            walkDown.AddFrame(new Rectangle(0, 0, 64, 64), TimeSpan.FromSeconds(.25));
+            walkDown.AddFrame(new Rectangle(0, 0, 64, 64), TimeSpan.FromSeconds(.25));
+            walkDown.AddFrame(new Rectangle(128, 0, 64, 64), TimeSpan.FromSeconds(.25));
 
             walkUp = new Animation();
-            walkUp.AddFrame(new Rectangle(576, 324, 64, 64), TimeSpan.FromSeconds(.25));
-            walkUp.AddFrame(new Rectangle(640, 324, 64, 64), TimeSpan.FromSeconds(.25));
-            walkUp.AddFrame(new Rectangle(576, 324, 64, 64), TimeSpan.FromSeconds(.25));
-            walkUp.AddFrame(new Rectangle(704, 324, 64, 64), TimeSpan.FromSeconds(.25));
+            walkUp.AddFrame(new Rectangle(576, 0, 64, 64), TimeSpan.FromSeconds(.25));
+            walkUp.AddFrame(new Rectangle(640, 0, 64, 64), TimeSpan.FromSeconds(.25));
+            walkUp.AddFrame(new Rectangle(576, 0, 64, 64), TimeSpan.FromSeconds(.25));
+            walkUp.AddFrame(new Rectangle(704, 0, 64, 64), TimeSpan.FromSeconds(.25));
 
             walkLeft = new Animation();
-            walkLeft.AddFrame(new Rectangle(192, 324, 64, 64), TimeSpan.FromSeconds(.25));
-            walkLeft.AddFrame(new Rectangle(256, 324, 64, 64), TimeSpan.FromSeconds(.25));
-            walkLeft.AddFrame(new Rectangle(192, 324, 64, 64), TimeSpan.FromSeconds(.25));
-            walkLeft.AddFrame(new Rectangle(320, 324, 64, 64), TimeSpan.FromSeconds(.25));
+            walkLeft.AddFrame(new Rectangle(192, 0, 64, 64), TimeSpan.FromSeconds(.25));
+            walkLeft.AddFrame(new Rectangle(256, 0, 64, 64), TimeSpan.FromSeconds(.25));
+            walkLeft.AddFrame(new Rectangle(192, 0, 64, 64), TimeSpan.FromSeconds(.25));
+            walkLeft.AddFrame(new Rectangle(320, 0, 64, 64), TimeSpan.FromSeconds(.25));
 
             walkRight = new Animation();
-            walkRight.AddFrame(new Rectangle(384, 324, 64, 64), TimeSpan.FromSeconds(.25));
-            walkRight.AddFrame(new Rectangle(448, 324, 64, 64), TimeSpan.FromSeconds(.25));
-            walkRight.AddFrame(new Rectangle(384, 324, 64, 64), TimeSpan.FromSeconds(.25));
-            walkRight.AddFrame(new Rectangle(512, 324, 64, 64), TimeSpan.FromSeconds(.25));
+            walkRight.AddFrame(new Rectangle(384, 0, 64, 64), TimeSpan.FromSeconds(.25));
+            walkRight.AddFrame(new Rectangle(448, 0, 64, 64), TimeSpan.FromSeconds(.25));
+            walkRight.AddFrame(new Rectangle(384, 0, 64, 64), TimeSpan.FromSeconds(.25));
+            walkRight.AddFrame(new Rectangle(512, 0, 64, 64), TimeSpan.FromSeconds(.25));
 
             // Standing animations only have a single frame of animation:
             standDown = new Animation();
-            standDown.AddFrame(new Rectangle(0, 324, 64, 64), TimeSpan.FromSeconds(.25));
+            standDown.AddFrame(new Rectangle(0, 0, 64, 64), TimeSpan.FromSeconds(.25));
 
             standUp = new Animation();
-            standUp.AddFrame(new Rectangle(576, 324, 64, 64), TimeSpan.FromSeconds(.25));
+            standUp.AddFrame(new Rectangle(576, 0, 64, 64), TimeSpan.FromSeconds(.25));
 
             standLeft = new Animation();
-            standLeft.AddFrame(new Rectangle(192, 324, 64, 64), TimeSpan.FromSeconds(.25));
+            standLeft.AddFrame(new Rectangle(192, 0, 64, 64), TimeSpan.FromSeconds(.25));
 
             standRight = new Animation();
-            standRight.AddFrame(new Rectangle(384, 324, 64, 64), TimeSpan.FromSeconds(.25));
+            standRight.AddFrame(new Rectangle(384, 0, 64, 64), TimeSpan.FromSeconds(.25));
         }
 
         public NPC(Texture2D newTexture, Vector2 newPosition, Rectangle newNpcBounds)
@@ -86,9 +86,9 @@ namespace ArenaGame
             texture = newTexture;
             position = newPosition;
             npcBounds = newNpcBounds;
+            MovementCooldown = TimeSpan.FromSeconds(random.Next(3, 8));
 
-            
-        
+
 
             initAnimations();
 
