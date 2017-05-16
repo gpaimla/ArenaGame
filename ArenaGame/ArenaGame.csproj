@@ -66,6 +66,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MapClasses\RectangleHelper.cs" />
     <Compile Include="MapClasses\Tile.cs" />
+    <Compile Include="UtilityClasses\RandomNumber.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

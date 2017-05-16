@@ -17,11 +17,10 @@ namespace ArenaGame
         public bool isVisible = true;
         public bool isMoving;
 
-        private Random random;
+        private RandomNumber randomNumber;
 
         private TimeSpan MovementCooldown;// = TimeSpan.FromSeconds(random.Next(3, 8));
         private TimeSpan? LastMovement;
-        private TimeSpan? NewMovement;
 
 
         Animation walkDown;
@@ -81,15 +80,11 @@ namespace ArenaGame
 
         public NPC(Texture2D newTexture, Vector2 newPosition, Rectangle newNpcBounds)
         {
-            random = new Random();
-            velocity = new Vector2(random.Next(-2, 2), random.Next(-2, 2));
+            randomNumber = new RandomNumber();
             texture = newTexture;
             position = newPosition;
             npcBounds = newNpcBounds;
-            MovementCooldown = TimeSpan.FromSeconds(random.Next(3, 8));
-
-
-
+            
             initAnimations();
 
             currentAnimation = standDown;
@@ -157,7 +152,9 @@ namespace ArenaGame
             {
                 isMoving = !isMoving; 
                 LastMovement = gameTime.TotalGameTime;
-                velocity = new Vector2(random.Next(-2, 2), random.Next(-2, 2));
+                velocity = new Vector2(randomNumber.Next(-2, 2), randomNumber.Next(-2, 2));
+
+                MovementCooldown = TimeSpan.FromSeconds(randomNumber.Next(1, 7));
             }
             
           
