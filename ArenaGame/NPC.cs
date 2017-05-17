@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -10,13 +11,15 @@ namespace ArenaGame
 {
     class NPC
     {
+        
+
         public Texture2D texture;
         public Vector2 position;
         public Rectangle npcBounds;
 
         public bool isVisible = true;
         public bool isMoving;
-
+        private bool showDialog = false;
         private RandomNumber randomNumber;
 
         private TimeSpan MovementCooldown;// = TimeSpan.FromSeconds(random.Next(3, 8));
@@ -37,6 +40,33 @@ namespace ArenaGame
 
         private Vector2 velocity;
 
+        private Rectangle talkRectangleCollision;
+
+
+        static private Texture2D characterBorder;
+        static Texture2D dialogueBox;
+        public NPC(Texture2D newTexture, Vector2 newPosition, Rectangle newNpcBounds, GraphicsDevice graphics,ContentManager Content)
+        {
+            randomNumber = new RandomNumber();
+            texture = newTexture;
+            position = newPosition;
+            npcBounds = newNpcBounds;
+
+            talkRectangleCollision = new Rectangle((int)position.X-256/2,(int)position.Y-256/2,256,256);
+            if(dialogueBox == null)
+            {
+                dialogueBox = Content.Load<Texture2D>("Characters/dialogBox");
+            }
+            if (characterBorder == null)
+            {
+                characterBorder = new Texture2D(graphics, 64, 64);
+                characterBorder.CreateBorder(1, Color.Red);
+            }
+
+            initAnimations();
+            currentAnimation = standDown;
+
+        }
 
         private void initAnimations()
         {
@@ -78,18 +108,7 @@ namespace ArenaGame
             standRight.AddFrame(new Rectangle(384, 0, 64, 64), TimeSpan.FromSeconds(.25));
         }
 
-        public NPC(Texture2D newTexture, Vector2 newPosition, Rectangle newNpcBounds)
-        {
-            randomNumber = new RandomNumber();
-            texture = newTexture;
-            position = newPosition;
-            npcBounds = newNpcBounds;
-            
-            initAnimations();
 
-            currentAnimation = standDown;
-            
-        }
 
         public void checkMovement()
         {
@@ -145,19 +164,56 @@ namespace ArenaGame
                 }
             }
         }
-        public void Update(GameTime gameTime)
+
+        public void Update(GameTime gameTime, Rectangle characterPosition)
         {
 
+            randomMovement(gameTime);
+            checkTalkCollision(characterPosition);
+            checkMovement();
+        }
+        private void checkTalkCollision(Rectangle characterPosition)
+        {
+            talkRectangleCollision.X = (int)position.X-talkRectangleCollision.Width/2+32;
+            talkRectangleCollision.Y = (int)position.Y-talkRectangleCollision.Height/2+32;
+            Collision(characterPosition);
+            
+        }
+        public void Collision(Rectangle newRectangle)
+        {
+
+            
+
+            if (newRectangle.TouchTopOf(talkRectangleCollision)|| newRectangle.TouchBottomOf(talkRectangleCollision)|| newRectangle.TouchRightOf(talkRectangleCollision)|| (newRectangle.TouchLeftOf(talkRectangleCollision)))
+            {
+                showDialog = true;
+            }else
+            {
+                showDialog = false;
+            }
+
+
+
+        }
+        private void createDialog(SpriteBatch spriteBatch)
+        {
+            Vector2 f = position;
+            f.X -= currentAnimation.CurrentRectangle.Width / 2;
+            f.Y -= dialogueBox.Height;
+            spriteBatch.Draw(dialogueBox,f , Color.White);
+        }
+        private void randomMovement(GameTime gameTime)
+        {
             if (LastMovement == null || gameTime.TotalGameTime - LastMovement >= MovementCooldown)
             {
-                isMoving = !isMoving; 
+                isMoving = !isMoving;
                 LastMovement = gameTime.TotalGameTime;
-                velocity = new Vector2(randomNumber.Next(-2, 2), randomNumber.Next(-2, 2));
+                velocity = new Vector2(randomNumber.Next(-2, 3), randomNumber.Next(-2, 3));
 
                 MovementCooldown = TimeSpan.FromSeconds(randomNumber.Next(1, 7));
             }
-            
-          
+
+
             if (isMoving)
             {
                 position += velocity;
@@ -174,12 +230,15 @@ namespace ArenaGame
                     velocity.X = -velocity.X;
                 }
             }
-
-            checkMovement();
         }
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, position, currentAnimation.CurrentRectangle, Color.White);
+            spriteBatch.Draw(characterBorder, talkRectangleCollision, Color.White);
+            if (showDialog)
+            {
+                createDialog(spriteBatch);
+            }
         }
     }
 }

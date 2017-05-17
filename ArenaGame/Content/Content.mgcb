@@ -25,13 +25,6 @@
 /processorParam:TextureFormat=Color
 /build:charactersheet64.png
 
-#begin font04b08.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:font04b08.spritefont
-
 #begin 04b08.bmp
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -259,4 +252,16 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Characters/wizard.png
+
+#begin Characters/dialogBox.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Characters/dialogBox.png
 

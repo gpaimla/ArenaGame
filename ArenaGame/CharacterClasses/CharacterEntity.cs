@@ -16,7 +16,7 @@ namespace ArenaGame
         static TimeSpan shootingCooldown = TimeSpan.FromMilliseconds(150);
         private TimeSpan? lastBulletShot;
 
-        static Texture2D characterSheetTexture;
+        public static Texture2D characterSheetTexture;
         static private Texture2D characterBorder;
 
         private const float desiredSpeed = 350;

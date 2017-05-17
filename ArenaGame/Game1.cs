@@ -77,9 +77,9 @@ namespace ArenaGame
 
             npcs = new List<NPC>();
 
-            npcs.Add(new NPC(Content.Load<Texture2D>("Characters/knight"), new Vector2(400, 630), new Rectangle(350, 625, 200, 100)));
-            npcs.Add(new NPC(Content.Load<Texture2D>("Characters/warrior"), new Vector2(160, 900), new Rectangle(150, 800, 100, 200)));
-            npcs.Add(new NPC(Content.Load<Texture2D>("Characters/wizard"), new Vector2(450, 1050), new Rectangle(300, 900, 200, 190)));
+            npcs.Add(new NPC(Content.Load<Texture2D>("Characters/knight"), new Vector2(400, 630), new Rectangle(350, 625, 200, 100), GraphicsDevice,Content));
+            npcs.Add(new NPC(Content.Load<Texture2D>("Characters/warrior"), new Vector2(160, 900), new Rectangle(150, 800, 100, 200),GraphicsDevice,Content));
+            npcs.Add(new NPC(Content.Load<Texture2D>("Characters/wizard"), new Vector2(450, 1050), new Rectangle(300, 900, 200, 190), GraphicsDevice,Content));
 
             base.Initialize();
 
@@ -128,7 +128,7 @@ namespace ArenaGame
             camera.Update(character.X, character.Y, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
 
             //npcs.Update(gameTime);
-            foreach (NPC npc in npcs) { npc.Update(gameTime); }
+            foreach (NPC npc in npcs) { npc.Update(gameTime, new Rectangle((int)character.X,(int) character.Y,CharacterEntity.characterSheetTexture.Width, CharacterEntity.characterSheetTexture.Height)); }
 
             graphics.ApplyChanges();
             base.Update(gameTime);
