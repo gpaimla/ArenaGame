@@ -265,3 +265,10 @@
 /processorParam:TextureFormat=Color
 /build:Characters/dialogBox.png
 
+#begin Courier New.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Courier New.spritefont
+

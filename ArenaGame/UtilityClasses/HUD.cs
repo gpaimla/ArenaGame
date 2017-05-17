@@ -42,22 +42,23 @@ namespace ArenaGame
 
         public void LoadContent(ContentManager Content)
         {
-            //hudFont = Content.Load<SpriteFont>("font04b08");
+            hudFont = Content.Load<SpriteFont>("Courier New");
+            
         }
 
         public void Update(GameTime gametime, float x, float y)
         {
             //healthRectangle = new Rectangle(50, 20, player.health, 15);
-            /*playerPosVec = new Vector2(x, y);
-            playerPosTxt = "X: " + Math.Round(playerPosVec.X) + " Y: " + Math.Round(playerPosVec.Y);*/
+            playerPosVec = new Vector2(x, y);
+            playerPosTxt = "X: " + Math.Round(playerPosVec.X) + " Y: " + Math.Round(playerPosVec.Y);
             gameTimeTxt = "GameTime in S: " + gametime.TotalGameTime.TotalSeconds;
         }
         public void Draw(SpriteBatch spriteBatch)
         {
             if(ShowHud)
             {
-                /*spriteBatch.DrawString(hudFont, playerPosTxt, playerPosPosition, Color.White);
-                spriteBatch.DrawString(hudFont, gameTimeTxt, gameTimePosition, Color.White);*/
+                spriteBatch.DrawString(hudFont, playerPosTxt, playerPosPosition, Color.White);
+                spriteBatch.DrawString(hudFont, gameTimeTxt, gameTimePosition, Color.White);
 
                 spriteBatch.Draw(healthTexture, healthRectangle, Color.White);
             }
