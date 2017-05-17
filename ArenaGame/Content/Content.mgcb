@@ -253,6 +253,13 @@
 /processorParam:TextureFormat=Color
 /build:Characters/wizard.png
 
+#begin Courier New.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Courier New.spritefont
+
 #begin Characters/dialogBox.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -265,10 +272,15 @@
 /processorParam:TextureFormat=Color
 /build:Characters/dialogBox.png
 
-#begin Courier New.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
+#begin Characters/dialogBubble.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
 /processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:Courier New.spritefont
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Characters/dialogBubble.png
 

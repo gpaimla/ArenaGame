@@ -11,8 +11,6 @@ namespace ArenaGame
 {
     class NPC
     {
-        
-
         public Texture2D texture;
         public Vector2 position;
         public Rectangle npcBounds;
@@ -42,9 +40,11 @@ namespace ArenaGame
 
         private Rectangle talkRectangleCollision;
 
-
         static private Texture2D characterBorder;
         static Texture2D dialogueBox;
+
+
+
         public NPC(Texture2D newTexture, Vector2 newPosition, Rectangle newNpcBounds, GraphicsDevice graphics,ContentManager Content)
         {
             randomNumber = new RandomNumber();
@@ -55,7 +55,7 @@ namespace ArenaGame
             talkRectangleCollision = new Rectangle((int)position.X-256/2,(int)position.Y-256/2,256,256);
             if(dialogueBox == null)
             {
-                dialogueBox = Content.Load<Texture2D>("Characters/dialogBox");
+                dialogueBox = Content.Load<Texture2D>("Characters/dialogBubble");
             }
             if (characterBorder == null)
             {
@@ -197,10 +197,11 @@ namespace ArenaGame
         }
         private void createDialog(SpriteBatch spriteBatch)
         {
-            Vector2 f = position;
-            f.X -= currentAnimation.CurrentRectangle.Width / 2;
-            f.Y -= dialogueBox.Height;
-            spriteBatch.Draw(dialogueBox,f , Color.White);
+            Vector2 p = position;
+            p.X -= currentAnimation.CurrentRectangle.Width - 100;
+            p.Y -= 50;
+            Rectangle dialogueRectangle = new Rectangle((int)p.X, (int)p.Y, 50, 44);
+            spriteBatch.Draw(dialogueBox, dialogueRectangle, Color.White);
         }
         private void randomMovement(GameTime gameTime)
         {
