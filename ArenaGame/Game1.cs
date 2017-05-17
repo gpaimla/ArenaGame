@@ -128,7 +128,7 @@ namespace ArenaGame
             camera.Update(character.X, character.Y, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
 
             //npcs.Update(gameTime);
-            foreach (NPC npc in npcs) { npc.Update(gameTime, new Rectangle((int)character.X,(int) character.Y,CharacterEntity.characterSheetTexture.Width, CharacterEntity.characterSheetTexture.Height)); }
+            foreach (NPC npc in npcs) { npc.Update(gameTime, new Rectangle((int)character.X,(int) character.Y, 64, 64)); }
 
             graphics.ApplyChanges();
             base.Update(gameTime);
