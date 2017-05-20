@@ -43,11 +43,12 @@
   <ItemGroup>
     <Compile Include="AnimationClasses\Animation.cs" />
     <Compile Include="AnimationClasses\AnimationFrame.cs" />
+    <Compile Include="CharacterClasses\Stats.cs" />
     <Compile Include="CollidableObjectClasses\CollidableChestSide.cs" />
     <Compile Include="CollidableObjectClasses\CollidableChestVertical.cs" />
     <Compile Include="CollidableObjectClasses\CollidablesChestVerticalBot.cs" />
     <Compile Include="Inventory.cs" />
-    <Compile Include="NPC.cs" />
+    <Compile Include="CharacterClasses\NPC.cs" />
     <Compile Include="UtilityClasses\BackgroundScrollingLayer.cs" />
     <Compile Include="UtilityClasses\Camera.cs" />
     <Compile Include="CharacterClasses\CharacterEntity.cs" />
@@ -67,7 +68,7 @@
     <Compile Include="MapClasses\RectangleHelper.cs" />
     <Compile Include="MapClasses\Tile.cs" />
     <Compile Include="UtilityClasses\RandomNumber.cs" />
-    <Compile Include="VariablesHolder.cs" />
+    <Compile Include="UtilityClasses\VariablesHolder.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

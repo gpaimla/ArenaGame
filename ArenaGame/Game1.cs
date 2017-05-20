@@ -107,7 +107,7 @@ namespace ArenaGame
             checkKeyInput();
 
             sharedVariables.Character.Update(gameTime);
-            sharedVariables.Hud.Update(gameTime, sharedVariables.Character.X, sharedVariables.Character.Y);
+            sharedVariables.Hud.Update(gameTime, sharedVariables.Character.X, sharedVariables.Character.Y, sharedVariables.Character.charStats.health);
 
             parallexScrolling();
             checkCollisionBetweenMapObjects();

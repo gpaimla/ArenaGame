@@ -46,9 +46,9 @@ namespace ArenaGame
             
         }
 
-        public void Update(GameTime gametime, float x, float y)
+        public void Update(GameTime gametime, float x, float y, int playerHealth)
         {
-            //healthRectangle = new Rectangle(50, 20, player.health, 15);
+            healthRectangle.Width = playerHealth;
             playerPosVec = new Vector2(x, y);
             playerPosTxt = "X: " + Math.Round(playerPosVec.X) + " Y: " + Math.Round(playerPosVec.Y);
             gameTimeTxt = "GameTime in S: " + gametime.TotalGameTime.TotalSeconds;

@@ -36,6 +36,8 @@ namespace ArenaGame
         MouseState oldState;
         KeyboardState previousState;
 
+        public Stats charStats;
+
         SharedVariables sharedVariables = SharedVariables.Instance;
 
         public float X{ get; set; }
@@ -44,8 +46,7 @@ namespace ArenaGame
         public static Texture2D ProjectileTexture { get; set; }
 
         public CharacterEntity()
-        {
-
+        {  
             X = 1460;
             Y = 960;
 
@@ -62,7 +63,8 @@ namespace ArenaGame
             
             initAnimations();
             ProjectileTexture = sharedVariables.Content.Load<Texture2D>("Projectiles/Projectile1");
-           
+
+            charStats = new Stats(1, 100, 5, 1, 0, 1);
         }
         private void initAnimations()
         {
