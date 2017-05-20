@@ -11,20 +11,20 @@ namespace ArenaGame
 {
     public class Map
     {
-        GraphicsDevice graphics;
-        public static ContentManager Content;
+
+        SharedVariables sharedVariables = SharedVariables.Instance;
         public List<Tile> Tiles{get;set;}
         string tileName;
         static private Texture2D characterBorder;
-        public Map(string tileName, GraphicsDevice graphics)
+        public Map(string tileName)
         {
             this.tileName = tileName;
-            this.graphics = graphics;
+
             Tiles = new List<Tile>();
 
             if (characterBorder == null)
             {
-                characterBorder = new Texture2D(graphics, 64, 64);
+                characterBorder = new Texture2D(sharedVariables.Graphics, 64, 64);
                 characterBorder.CreateBorder(1, Color.Red);
             }
         }
@@ -60,33 +60,31 @@ namespace ArenaGame
             switch (name)
             {
                 case "Collidables1":
-                    return new CollidableFence(Map.Content.Load<Texture2D>("Collidables/" + name), pictureRectangle);
+                    return new CollidableFence(sharedVariables.Content.Load<Texture2D>("Collidables/" + name), pictureRectangle);
 
                 case "Collidables2":
-                    return new CollidableTree(Map.Content.Load<Texture2D>("Collidables/" + name), pictureRectangle);
-
-                
+                    return new CollidableTree(sharedVariables.Content.Load<Texture2D>("Collidables/" + name), pictureRectangle);
 
                 case "Collidables4":
-                    return new CollidableTreeCherry(Map.Content.Load<Texture2D>("Collidables/" + name), pictureRectangle);
+                    return new CollidableTreeCherry(sharedVariables.Content.Load<Texture2D>("Collidables/" + name), pictureRectangle);
 
                 case "Collidables5":
-                    return new CollidableFenceVerLeft(Map.Content.Load<Texture2D>("Collidables/" + name), pictureRectangle);
+                    return new CollidableFenceVerLeft(sharedVariables.Content.Load<Texture2D>("Collidables/" + name), pictureRectangle);
 
                 case "Collidables6":
-                    return new CollidableFenceVerRight(Map.Content.Load<Texture2D>("Collidables/" + name), pictureRectangle);
+                    return new CollidableFenceVerRight(sharedVariables.Content.Load<Texture2D>("Collidables/" + name), pictureRectangle);
 
                 case "Collidables7":
-                    return new CollidableChestSide(Map.Content.Load<Texture2D>("Collidables/" + name), pictureRectangle);
+                    return new CollidableChestSide(sharedVariables.Content.Load<Texture2D>("Collidables/" + name), pictureRectangle);
 
                 case "Collidables8":
-                    return new CollidableChestVertical(Map.Content.Load<Texture2D>("Collidables/" + name), pictureRectangle);
+                    return new CollidableChestVertical(sharedVariables.Content.Load<Texture2D>("Collidables/" + name), pictureRectangle);
 
                 case "Collidables9":
-                    return new CollidableChestVerticalBot(Map.Content.Load<Texture2D>("Collidables/" + name), pictureRectangle);
+                    return new CollidableChestVerticalBot(sharedVariables.Content.Load<Texture2D>("Collidables/" + name), pictureRectangle);
 
                 default:
-                    return new Tile(Map.Content.Load<Texture2D>("Tiles/" + name), pictureRectangle);
+                    return new Tile(sharedVariables.Content.Load<Texture2D>("Tiles/" + name), pictureRectangle);
 
             }
         }

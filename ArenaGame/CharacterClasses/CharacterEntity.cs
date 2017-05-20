@@ -36,32 +36,32 @@ namespace ArenaGame
         MouseState oldState;
         KeyboardState previousState;
 
-        
-        public ContentManager Content { get; set; }
+        SharedVariables sharedVariables = SharedVariables.Instance;
+
         public float X{ get; set; }
         public float Y { get; set; }
         private Vector2 velocity { get; set; }
         public static Texture2D ProjectileTexture { get; set; }
-        GraphicsDevice graphicsDevice;
-        public CharacterEntity(GraphicsDevice graphicsDevice,ContentManager Content)
+
+        public CharacterEntity()
         {
-            this.graphicsDevice = graphicsDevice;
+
             X = 1460;
             Y = 960;
-            this.Content = Content;
+
             if (characterSheetTexture == null)
             {
-                characterSheetTexture = Content.Load<Texture2D>("charactersheet64");
+                characterSheetTexture = sharedVariables.Content.Load<Texture2D>("charactersheet64");
             }
             if (characterBorder == null)
             {
-                characterBorder = new Texture2D(graphicsDevice, 64, 64);
+                characterBorder = new Texture2D(sharedVariables.Graphics, 64, 64);
                 characterBorder.CreateBorder(1, Color.Red);
                 
             }
             
             initAnimations();
-            ProjectileTexture = Content.Load<Texture2D>("Projectiles/Projectile1");
+            ProjectileTexture = sharedVariables.Content.Load<Texture2D>("Projectiles/Projectile1");
            
         }
         private void initAnimations()
@@ -160,8 +160,7 @@ namespace ArenaGame
                 { 
                     CharacterEntityShootableProjectile projectile = new CharacterEntityShootableProjectile(new Vector2(X,Y),
                     new Vector2(newState.X,newState.Y),
-                    ProjectileTexture, graphicsDevice);
-
+                    ProjectileTexture, sharedVariables.Graphics);
                     Projectiles.Add(projectile);
                     lastBulletShot = gameTime.TotalGameTime;
                 }

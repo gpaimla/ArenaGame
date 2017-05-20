@@ -22,23 +22,12 @@ namespace ArenaGame
         SpriteBatch spriteBatch;
         SpriteBatch hudSpriteBatch;
         SpriteBatch backgroundSpriteBatch;
-
-
-        Map map;
-        Map fenceMap;
-
-
         Camera camera;
-
-        CharacterEntity character;
         KeyboardState keyBoardState = Keyboard.GetState();
-
-        HUD hud;
-
         List<BackgroundScrollingLayer> layers;
 
-        List<NPC> npcs;
 
+        SharedVariables sharedVariables = SharedVariables.Instance;
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -47,6 +36,7 @@ namespace ArenaGame
             graphics.PreferredBackBufferHeight = 1080;
             graphics.IsFullScreen = false;
             graphics.ApplyChanges();
+            
         }
 
         /// <summary>
@@ -57,15 +47,13 @@ namespace ArenaGame
         /// </summary>
         protected override void Initialize()
         {
+            sharedVariables.Content = Content;
+            sharedVariables.Graphics = GraphicsDevice;
+            sharedVariables.initVariables();
+
             this.IsMouseVisible = true;
 
-            hud = new HUD(GraphicsDevice);
 
-            character = new CharacterEntity(this.GraphicsDevice,Content);
-
-            map = new Map("Tile", GraphicsDevice);
-            fenceMap = new Map("Collidables", GraphicsDevice);
-            Map.Content = Content;
 
             Texture2D stars1 = Content.Load<Texture2D>("Backgrounds/stars1");
             layers = new List<BackgroundScrollingLayer> {
@@ -74,12 +62,11 @@ namespace ArenaGame
                 { new BackgroundScrollingLayer(stars1, new Rectangle(0, 0, 2560, 2560),5) },
                 { new BackgroundScrollingLayer(Content.Load<Texture2D>("Backgrounds/stars2"), new Rectangle(0, 0, 2560, 2560),15) },
             };
+            
 
-            npcs = new List<NPC>();
-
-            npcs.Add(new NPC(Content.Load<Texture2D>("Characters/knight"), new Vector2(400, 630), new Rectangle(350, 625, 200, 100), GraphicsDevice,Content));
-            npcs.Add(new NPC(Content.Load<Texture2D>("Characters/warrior"), new Vector2(160, 900), new Rectangle(150, 800, 100, 200),GraphicsDevice,Content));
-            npcs.Add(new NPC(Content.Load<Texture2D>("Characters/wizard"), new Vector2(450, 1050), new Rectangle(300, 900, 200, 190), GraphicsDevice,Content));
+            sharedVariables.Npcs.Add(new NPC(Content.Load<Texture2D>("Characters/knight"), new Vector2(400, 630), new Rectangle(350, 625, 200, 100), GraphicsDevice,Content));
+            sharedVariables.Npcs.Add(new NPC(Content.Load<Texture2D>("Characters/warrior"), new Vector2(160, 900), new Rectangle(150, 800, 100, 200),GraphicsDevice,Content));
+            sharedVariables.Npcs.Add(new NPC(Content.Load<Texture2D>("Characters/wizard"), new Vector2(450, 1050), new Rectangle(300, 900, 200, 190), GraphicsDevice,Content));
 
             base.Initialize();
 
@@ -102,12 +89,12 @@ namespace ArenaGame
 
             camera = new Camera();
 
-            hud.LoadContent(Content);
-            hud.ShowHud = true;
+            sharedVariables.Hud.LoadContent(Content);
+            sharedVariables.Hud.ShowHud = true;
 
             
-            map.Generate(readMap("Maps/homeMap.txt", 66), 64);
-            fenceMap.Generate(readMap("Maps/fenceMap.txt", 66), 64);
+            sharedVariables.TileMap.Generate(readMap("Maps/homeMap.txt", 66), 64);
+            sharedVariables.FenceMap.Generate(readMap("Maps/fenceMap.txt", 66), 64);
         }
 
         /// <summary>
@@ -118,17 +105,17 @@ namespace ArenaGame
         protected override void Update(GameTime gameTime)
         {
             checkKeyInput();
-            
-            character.Update(gameTime);
-            hud.Update(gameTime,character.X,character.Y);
+
+            sharedVariables.Character.Update(gameTime);
+            sharedVariables.Hud.Update(gameTime, sharedVariables.Character.X, sharedVariables.Character.Y);
 
             parallexScrolling();
             checkCollisionBetweenMapObjects();
 
-            camera.Update(character.X, character.Y, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
+            camera.Update(sharedVariables.Character.X, sharedVariables.Character.Y, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
 
             //npcs.Update(gameTime);
-            foreach (NPC npc in npcs) { npc.Update(gameTime, new Rectangle((int)character.X,(int) character.Y, 64, 64)); }
+            foreach (NPC npc in sharedVariables.Npcs) { npc.Update(gameTime, new Rectangle((int)sharedVariables.Character.X,(int)sharedVariables.Character.Y, 64, 64)); }
 
             graphics.ApplyChanges();
             base.Update(gameTime);
@@ -154,23 +141,23 @@ namespace ArenaGame
         {
             foreach (BackgroundScrollingLayer layer in layers)
             {
-                layer.Update((int)character.X, (int)character.Y);
+                layer.Update((int)sharedVariables.Character.X, (int)sharedVariables.Character.Y);
             }
 
         }
         void checkCollisionBetweenMapObjects()
         {
-            foreach (Tile tile in fenceMap.Tiles)
+            foreach (Tile tile in sharedVariables.FenceMap.Tiles)
             {
-                character.Collision(tile.CollisionRectangle);
-                foreach (CharacterEntityShootableProjectile proj in character.Projectiles)
+                sharedVariables.Character.Collision(tile.CollisionRectangle);
+                foreach (CharacterEntityShootableProjectile proj in sharedVariables.Character.Projectiles)
                 {
                     proj.bulletCollision(tile);
                 }
                 //1726 4107
             }
             Rectangle outOfBoundsRectangle = new Rectangle(0, 0, 4171, 1664);
-            character.isOutOfBounds(outOfBoundsRectangle);
+            sharedVariables.Character.isOutOfBounds(outOfBoundsRectangle);
         }
         void checkKeyInput()
         {
@@ -203,16 +190,17 @@ namespace ArenaGame
                 null, null, null, null,
                 camera.Transform);
 
+            sharedVariables.TileMap.Draw(spriteBatch);
+            sharedVariables.Character.Draw(spriteBatch);
+            sharedVariables.FenceMap.Draw(spriteBatch);
             
-            map.Draw(spriteBatch);
-            character.Draw(spriteBatch);
-            fenceMap.Draw(spriteBatch);
             
-            foreach(NPC npc in npcs) { npc.Draw(spriteBatch); }
+            
+            foreach(NPC npc in sharedVariables.Npcs) { npc.Draw(spriteBatch); }
             spriteBatch.End();
 
             hudSpriteBatch.Begin();
-            hud.Draw(hudSpriteBatch);
+            sharedVariables.Hud.Draw(hudSpriteBatch);
             hudSpriteBatch.End();
             base.Draw(gameTime);
         }
